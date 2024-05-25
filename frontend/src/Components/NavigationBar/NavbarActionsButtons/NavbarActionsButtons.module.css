@@ -1,0 +1,58 @@
+.nav {
+  display: flex;
+  margin-right: 3.125rem;
+  text-transform: uppercase;
+  gap: var(--gap-large);
+}
+.actionButtonsOnMode {
+  gap: 10px;
+}
+.actionButtons > div:nth-child(1) {
+  /* Styles for the first div inside mother class */
+}
+.actionButtons > div:nth-child(2) {
+  display: none;
+}
+/* Styles for small devices (phones) */
+@media (max-width: 36rem) {
+  .nav {
+    display: none;
+  }
+  .actionButtons > div:nth-child(1) {
+    display: none;
+  }
+  .actionButtons > div:nth-child(2) {
+    display: block;
+  }
+}
+
+/* Styles for small devices (tablets) */
+@media (min-width: 36.063rem) and (max-width: 48rem) {
+  .nav {
+    display: none;
+  }
+  .actionButtons > div:nth-child(1) {
+    display: none;
+  }
+}
+
+/* Styles for medium devices (laptops and desktops) */
+@media (min-width: 48.063rem) and (max-width: 62rem) {
+  .actionButtons > div:nth-child(1) {
+    display: block;
+  }
+}
+
+/* Styles for large devices (desktops) */
+@media (min-width: 62.063rem) and (max-width: 75rem) {
+  .actionButtons > div:nth-child(1) {
+    display: block;
+  }
+}
+
+/* Styles for extra large devices (large desktops and TVs) */
+@media (min-width: 75.063rem) {
+  .actionButtons > div:nth-child(1) {
+    display: block;
+  }
+}

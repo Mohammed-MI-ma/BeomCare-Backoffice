@@ -1,0 +1,9 @@
+.membershipCard {
+  display: flex;
+  align-items: center;
+}
+.membershipCard > div:nth-child(1) {
+  height: 7.25rem;
+  display: flex;
+  align-items: center;
+}

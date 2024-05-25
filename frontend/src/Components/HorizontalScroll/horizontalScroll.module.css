@@ -1,0 +1,86 @@
+.horizontalScrollContainer {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  justify-content: center;
+  width: 100%;
+  overflow: hidden;
+  padding: 20px 0;
+  position: relative;
+}
+
+.scrollableContent {
+  display: flex;
+  overflow-x: scroll;
+  scroll-behavior: smooth;
+  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none; /* Firefox */
+  width: 80%;
+  padding: 10px 0;
+}
+
+.scrollableContent::-webkit-scrollbar {
+  display: none; /* Chrome, Safari, Opera */
+}
+
+.item {
+  flex: 0 0 auto;
+  margin: 0 10px;
+  padding: 40px;
+  background-color: white;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  flex-direction: column;
+}
+
+.logo {
+  width: 120px;
+  height: auto;
+}
+
+.scrollButton {
+  color: #5a5a5a;
+  border: 1px solid #5a5a5a;
+  padding: 10px 30px;
+  cursor: pointer;
+  border-radius: 50px;
+  margin: 0 10px;
+  transition: background-color 0.3s;
+  z-index: 1;
+}
+
+.scrollButton:hover {
+  background-color: black;
+  color: white;
+}
+
+.scrollButton:focus {
+  outline: none;
+}
+
+/* Styles for small devices (phones) */
+@media (max-width: 36rem) {
+  .scrollableContent {
+    width: 100%;
+  }
+}
+
+/* Styles for small devices (tablets) */
+@media (min-width: 36.063rem) and (max-width: 48rem) {
+}
+
+/* Styles for medium devices (laptops and desktops) */
+@media (min-width: 48.063rem) and (max-width: 62rem) {
+}
+
+/* Styles for large devices (desktops) */
+@media (min-width: 62.063rem) and (max-width: 75rem) {
+}
+
+/* Styles for extra large devices (large desktops and TVs) */
+@media (min-width: 75.063rem) {
+}

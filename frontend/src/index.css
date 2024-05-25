@@ -1,0 +1,145 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --font-primary: "Primary-Regular", sans-serif;
+}
+
+/* Font Sizes */
+:root {
+  --font-tiny-size: 0.625rem;
+  --font-extra-small-size: 0.625rem;
+  --font-small-size: 0.875rem;
+  --font-medium-size: 1rem;
+  --font-large-size: 1.125rem;
+  --font-extra-large-size: 1.5rem;
+}
+
+/* Colors */
+:root {
+  --color-primary: #000000; /* Primary color:Dark */
+  --color-secondary: #1d3034; /* Secondary color:Gray */
+  --color-accent: #fefefe; /* Accent color */
+  --color-text: #000000; /* Text color */
+}
+/* Gap Sizes */
+:root {
+  --gap-xx-small: 0.25rem; /* 4px converted to rem */
+  --gap-x-small: 0.5rem; /* 8px converted to rem */
+  --gap-small: 0.75rem; /* 12px converted to rem */
+  --gap-medium: 1rem; /* 16px converted to rem */
+  --gap-large: 1.5rem; /* 24px converted to rem */
+  --gap-x-large: 2rem; /* 32px converted to rem */
+  --gap-xx-large: 3rem; /* 48px converted to rem */
+}
+/* Spacing */
+:root {
+  --spacing-small: 0.5rem; /* 8px converted to rem */
+  --spacing-medium: 1rem; /* 16px converted to rem */
+  --spacing-large: 1.5rem; /* 24px converted to rem */
+}
+
+/* Border Radius */
+:root {
+  --border-radius-small: 0.25rem; /* 4px converted to rem */
+  --border-radius-medium: 0.5rem; /* 8px converted to rem */
+  --border-radius-large: 0.75rem; /* 12px converted to rem */
+}
+
+/* Box Shadows */
+:root {
+  --box-shadow-small: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.1); /* 2px converted to rem */
+  --box-shadow-medium: 0 0.25rem 0.5rem rgba(0, 0, 0, 0.1); /* 4px converted to rem */
+  --box-shadow-large: 0 0.375rem 0.75rem rgba(0, 0, 0, 0.1); /* 6px converted to rem */
+}
+
+/* Z-Index */
+:root {
+  --z-index-dropdown: 100;
+  --z-index-modal: 1000;
+  --z-index-overlay: 300;
+}
+
+/* Other Variables */
+:root {
+  --max-width-container: 75rem;
+}
+body {
+  margin: 0;
+  font-family: "Primary-Regular";
+}
+html,
+body {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+}
+.PhoneInputInput {
+  height: 32px;
+  border-radius: 5px;
+  border: 1px solid #d9d9d9;
+  padding: 15px;
+}
+/* ===== Scrollbar CSS ===== */
+/* Firefox */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: #000000 #ffffff;
+}
+
+/* Chrome, Edge, and Safari */
+*::-webkit-scrollbar {
+  width: 0.25px;
+}
+
+*::-webkit-scrollbar-track {
+  background: #ffffff;
+}
+
+*::-webkit-scrollbar-thumb {
+  background-color: #000000;
+  border-radius: 0px;
+  border: 1px solid #000000;
+}
+/* Left and Right Fade Effect */
+.video-container::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  width: 100px;
+  transform: translateX(1px);
+  height: 100%;
+  background: linear-gradient(to right, rgba(0, 0, 0, 0), black);
+}
+.video-container::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  width: 100px;
+  height: 100%;
+  background: linear-gradient(to left, rgba(0, 0, 0, 0), black);
+}
+.video-container::before {
+  left: 0;
+}
+
+.video-container::after {
+  right: 0;
+}
+
+/* mouse over link */
+a:hover {
+  color: #e1b74a;
+}
+
+/* selected link */
+a:active {
+  color: #e1b74a;
+}
+#components-table-demo-size h4 {
+  margin-bottom: 16px;
+}
+.ant-layout-sider {
+  background-color: #000000 !important;
+}

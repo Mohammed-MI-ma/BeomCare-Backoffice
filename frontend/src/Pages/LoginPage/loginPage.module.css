@@ -1,0 +1,67 @@
+.formContainer {
+  width: 95vw;
+  height: calc(100vh - 100px);
+  max-width: 1440px;
+  max-height: 700px;
+  transform: translateX(-50%);
+  left: 50%;
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+.formContainer > main:nth-child(1) {
+  background: #f5f5f5;
+  border-radius: 30px;
+  color: var(--color-primary);
+  left: 10px;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  justify-content: center;
+  height: 100%;
+}
+.formContainer > main:nth-child(1) > section {
+  width: 379px;
+}
+.header {
+  font-size: 15px;
+}
+.formContainer > div:nth-child(2) {
+  /* Styles for the first div inside mother class */
+}
+
+/* Styles for small devices (phones) */
+@media (max-width: 36rem) {
+  .formContainer > main:nth-child(2) {
+    display: none;
+  }
+  .formContainer > main:nth-child(1) {
+    width: 100%;
+    left: 0px;
+  }
+  .formContainer > main:nth-child(1) > section {
+    width: 100%;
+  }
+  .formContainer > main:nth-child(1) > h1 {
+    font-size: 45px;
+  }
+  .header {
+    font-size: 20px;
+  }
+}
+
+/* Styles for small devices (tablets) */
+@media (min-width: 36.063rem) and (max-width: 48rem) {
+}
+
+/* Styles for medium devices (laptops and desktops) */
+@media (min-width: 48.063rem) and (max-width: 62rem) {
+}
+
+/* Styles for large devices (desktops) */
+@media (min-width: 62.063rem) and (max-width: 75rem) {
+}
+
+/* Styles for extra large devices (large desktops and TVs) */
+@media (min-width: 75.063rem) {
+}
