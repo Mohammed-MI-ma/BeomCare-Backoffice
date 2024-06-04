@@ -1,0 +1,35 @@
+.topMenuBar {
+  flex-direction: row;
+}
+
+/* Styles for small devices (phones) */
+@media (max-width: 36rem) {
+  .topMenuBar {
+    flex-direction: column;
+  }
+}
+.submitButton {
+  background: var(--color-accent);
+  color: var(--color-primary);
+  font-size: 13px;
+  width: 100%;
+}
+
+/* Styles for small devices (tablets) */
+@media (min-width: 36.063rem) and (max-width: 48rem) {
+  .sider {
+    display: none;
+  }
+}
+
+/* Styles for medium devices (laptops and desktops) */
+@media (min-width: 48.063rem) and (max-width: 62rem) {
+}
+
+/* Styles for large devices (desktops) */
+@media (min-width: 62.063rem) and (max-width: 75rem) {
+}
+
+/* Styles for extra large devices (large desktops and TVs) */
+@media (min-width: 75.063rem) {
+}

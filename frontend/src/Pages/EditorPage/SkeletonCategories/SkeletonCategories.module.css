@@ -1,0 +1,53 @@
+:root {
+  --border-radius-large: 1rem; /* Adjust this value as needed */
+  --gap-small: 0.5rem; /* Adjust this value as needed */
+}
+
+.boxSkeleton {
+  max-height: 18.75rem; /* 300px = 18.75rem */
+  overflow-y: auto;
+  border-radius: var(--border-radius-large);
+  box-shadow: 0 0 0 0.0625rem rgba(4, 30, 73, 0.3) inset; /* 1px = 0.0625rem */
+}
+
+.boxSkeleton > div {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: var(--gap-small);
+}
+.rectSkeleton {
+  width: 12.5rem !important;
+  height: 0.625rem !important;
+}
+.circleSkeleton {
+  height: 1rem !important;
+  width: 3.5rem !important;
+}
+
+/* Styles for small devices (phones) */
+@media (max-width: 36rem) {
+  .circleSkeleton {
+    height: 1rem !important;
+    width: 2rem !important;
+  }
+  .rectSkeleton {
+    width: 6rem !important;
+    height: 0.625rem !important;
+  }
+}
+/* Styles for small devices (tablets) */
+@media (min-width: 36.063rem) and (max-width: 48rem) {
+}
+
+/* Styles for medium devices (laptops and desktops) */
+@media (min-width: 48.063rem) and (max-width: 62rem) {
+}
+
+/* Styles for large devices (desktops) */
+@media (min-width: 62.063rem) and (max-width: 75rem) {
+}
+
+/* Styles for extra large devices (large desktops and TVs) */
+@media (min-width: 75.063rem) {
+}

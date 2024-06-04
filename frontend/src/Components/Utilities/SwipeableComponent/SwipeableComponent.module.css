@@ -1,0 +1,14 @@
+/* SwipeableComponent.module.css */
+
+.swipeable {
+  width: 100%; /* Adjust as needed */
+  transition: transform 0.5s ease-in-out;
+}
+
+.left {
+  transform: translateX(-100%);
+}
+
+.right {
+  transform: translateX(100%);
+}

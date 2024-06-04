@@ -15,8 +15,8 @@
   scroll-behavior: smooth;
   -ms-overflow-style: none; /* IE and Edge */
   scrollbar-width: none; /* Firefox */
-  width: 80%;
-  padding: 10px 0;
+  padding: 10px 10px;
+  width: 600px;
 }
 
 .scrollableContent::-webkit-scrollbar {
@@ -27,9 +27,8 @@
   flex: 0 0 auto;
   margin: 0 10px;
   padding: 40px;
-  background-color: white;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  border-radius: 8px;
+  border-radius: 50px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -44,8 +43,8 @@
 
 .scrollButton {
   color: #5a5a5a;
-  border: 1px solid #5a5a5a;
-  padding: 10px 30px;
+  border: 1px solid #edf0f6;
+  padding: 5px 30px;
   cursor: pointer;
   border-radius: 50px;
   margin: 0 10px;
@@ -54,7 +53,7 @@
 }
 
 .scrollButton:hover {
-  background-color: black;
+  background-color: rgba(4, 30, 73, 0.7);
   color: white;
 }
 

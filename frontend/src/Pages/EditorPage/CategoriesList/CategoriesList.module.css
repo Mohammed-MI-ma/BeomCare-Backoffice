@@ -1,0 +1,53 @@
+:root {
+  --border-radius-large: 1rem; /* Adjust this value as needed */
+  --gap-small: 0.5rem; /* Adjust this value as needed */
+}
+
+.box {
+  max-height: 12.75rem; /* 300px = 18.75rem */
+  min-height: 12.75rem;
+  overflow-y: auto;
+  overflow-x: clip;
+  border-radius: var(--border-radius-large);
+  box-shadow: 0 0 0 0.0625rem rgba(4, 30, 73, 0.3) inset; /* 1px = 0.0625rem */
+  background-color: white;
+}
+
+.categoryItem {
+  display: flex;
+  position: relative;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.rect {
+  font-size: 20px;
+}
+
+.icons {
+  display: flex;
+  flex-direction: column;
+}
+
+/* Styles for small devices (phones) */
+@media (max-width: 36rem) {
+  .rect {
+    width: 6rem;
+    gap: 10px;
+  }
+}
+/* Styles for small devices (tablets) */
+@media (min-width: 36.063rem) and (max-width: 48rem) {
+}
+
+/* Styles for medium devices (laptops and desktops) */
+@media (min-width: 48.063rem) and (max-width: 62rem) {
+}
+
+/* Styles for large devices (desktops) */
+@media (min-width: 62.063rem) and (max-width: 75rem) {
+}
+
+/* Styles for extra large devices (large desktops and TVs) */
+@media (min-width: 75.063rem) {
+}

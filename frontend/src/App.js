@@ -1,6 +1,6 @@
 import { ConfigProvider, message } from "antd";
 import { useEffect, useState } from "react";
-import { Route, Routes, useLocation } from "react-router-dom";
+import { Route, Routes, useLocation, useNavigate } from "react-router-dom";
 import Loader from "./Components/Loader";
 import frFR from "antd/lib/locale/fr_FR";
 
@@ -20,13 +20,19 @@ import { setDrawerOpenSettings } from "./Reducers/applicationService/application
 function App() {
   const [appIsReady, setAppIsReady] = useState(false);
   const location = useLocation();
+  const navigate = useNavigate();
+
   const { t } = useTranslation();
   const d = useDispatch();
   const openSettings = useSelector(
     (state) => state.application.drawerOpenSettings
   );
+  const isUserLoggedIn = useSelector((state) => state.auth.drawerOpenSettings);
   //__settings_drawer
   const onClose = () => d(setDrawerOpenSettings(false));
+  useEffect(() => {
+    if (!isUserLoggedIn) navigate("/");
+  }, [isUserLoggedIn]);
 
   useEffect(() => {
     async function fetchData() {

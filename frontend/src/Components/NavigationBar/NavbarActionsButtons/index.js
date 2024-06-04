@@ -1,8 +1,6 @@
 import React from "react";
-import { useTranslation } from "react-i18next";
-import { useNavigate } from "react-router-dom";
 
-import { Avatar, Badge, Button, ConfigProvider, Space, Tooltip } from "antd";
+import { Avatar, Badge, Button, ConfigProvider, Space } from "antd";
 import { Link } from "react-router-dom";
 import useFontFamily from "../../../Utilities/useFontFamily";
 import style from "./NavbarActionsButtons.module.css";
@@ -18,6 +16,7 @@ import settings30x30 from "../../../Assets/images/BeomPartner/settings-icon/icon
 import settings60x60 from "../../../Assets/images/BeomPartner/settings-icon/iconamoon_settings-thin_medium.png";
 import settings120x120 from "../../../Assets/images/BeomPartner/settings-icon/iconamoon_settings-thin_medium_large.png";
 import { setDrawerOpenSettings } from "../../../Reducers/applicationService/applicationSlice";
+import CustomTooltip from "../../Utilities/CustomTooltip";
 
 const iconBell = [
   { src: users30x30, width: 30 },
@@ -62,14 +61,15 @@ export const ActionButton = ({ children, style, to }) => {
 };
 
 const NavbarActionsButtons = () => {
-  const { t } = useTranslation();
   const dispatch = useDispatch();
   const fontFamilyMedium = useFontFamily("Medium");
-  const fontFamilyExtraLight = useFontFamily("ExtraLight");
   const isUserLoggedIn = useSelector((state) => state.auth.isUserLoggedIn);
   const openSettings = () => {
     dispatch(setDrawerOpenSettings(true));
   };
+  const fontFamilyLight = useFontFamily("Light");
+  const userInfo = useSelector((state) => state.auth.userInfo);
+
   return (
     <Space>
       {!isUserLoggedIn ? (
@@ -87,15 +87,17 @@ const NavbarActionsButtons = () => {
             }}
           >
             <Badge count="0">
-              <Avatar
-                size={"default"}
-                style={{
-                  fontFamily: fontFamilyMedium,
-                  background: "white",
-                }}
-              >
-                <ResponsiveIcon alt="Bell icon" images={iconBell} />
-              </Avatar>{" "}
+              <CustomTooltip title={"Notifications"}>
+                <Avatar
+                  size={"default"}
+                  style={{
+                    fontFamily: fontFamilyMedium,
+                    background: "white",
+                  }}
+                >
+                  <ResponsiveIcon alt="Bell icon" images={iconBell} />
+                </Avatar>
+              </CustomTooltip>
             </Badge>
           </Button>
 
@@ -110,17 +112,7 @@ const NavbarActionsButtons = () => {
               alignItems: "center",
             }}
           >
-            <Tooltip
-              title={
-                <p
-                  style={{
-                    fontFamily: fontFamilyExtraLight,
-                  }}
-                >
-                  {t("Paramètres du compte")}
-                </p>
-              }
-            >
+            <CustomTooltip title={"Paramètres du compte"}>
               <Avatar
                 size={"default"}
                 style={{
@@ -130,8 +122,20 @@ const NavbarActionsButtons = () => {
               >
                 <ResponsiveIcon alt="Settings icon" images={iconSettings} />
               </Avatar>
-            </Tooltip>
+            </CustomTooltip>
           </Button>
+          <Avatar
+            size={40}
+            style={{
+              background: "black",
+              border: "1px solid white",
+              fontSize: "8px",
+              fontFamily: fontFamilyLight,
+              textTransform: "uppercase",
+            }}
+          >
+            {userInfo?.mission}
+          </Avatar>
         </CenteredFlexComponent>
       )}
     </Space>

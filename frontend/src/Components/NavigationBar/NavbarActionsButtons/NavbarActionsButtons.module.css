@@ -7,6 +7,7 @@
 .actionButtonsOnMode {
   gap: 10px;
 }
+
 .actionButtons > div:nth-child(1) {
   /* Styles for the first div inside mother class */
 }

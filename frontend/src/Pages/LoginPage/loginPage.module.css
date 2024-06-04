@@ -24,7 +24,10 @@
   width: 379px;
 }
 .header {
-  font-size: 15px;
+  font-size: var(--font-medium-size);
+  color: rgba(4, 30, 73, 0.7);
+  text-align: center;
+  margin-bottom: var(--gap-medium);
 }
 .formContainer > div:nth-child(2) {
   /* Styles for the first div inside mother class */
@@ -42,11 +45,8 @@
   .formContainer > main:nth-child(1) > section {
     width: 100%;
   }
-  .formContainer > main:nth-child(1) > h1 {
-    font-size: 45px;
-  }
   .header {
-    font-size: 20px;
+    font-size: var(--font-medium-size);
   }
 }
 

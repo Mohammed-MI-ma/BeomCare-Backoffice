@@ -1,11 +1,20 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { GrArticle } from "react-icons/gr";
+import { getAllCategories } from "./actions/applicationService";
 
 // Initial state
 const initialState = {
   language: "fr",
   isGettingCategories: false,
   categories: [],
+  pagination: {
+    totalItems: 0,
+    currentPage: 1,
+    totalPages: 0,
+    itemsPerPage: 5,
+    hasNextPage: false,
+    hasPrevPage: false,
+  },
   roleSelected: {
     id: "editor",
     role: "editor",
@@ -41,6 +50,22 @@ const applicationSlice = createSlice({
     setDrawerOpenSettings: (state, action) => {
       state.drawerOpenSettings = action.payload;
     },
+  },
+  extraReducers: (builder) => {
+    builder
+      .addCase(getAllCategories.pending, (state) => {
+        state.isGettingCategories = true;
+        state.error = null;
+      })
+      .addCase(getAllCategories.fulfilled, (state, action) => {
+        state.isGettingCategories = false;
+        state.categories = action.payload.data;
+        state.pagination = action.payload.pagination;
+      })
+      .addCase(getAllCategories.rejected, (state, action) => {
+        state.isGettingCategories = false;
+        state.error = action.payload;
+      });
   },
 });
 

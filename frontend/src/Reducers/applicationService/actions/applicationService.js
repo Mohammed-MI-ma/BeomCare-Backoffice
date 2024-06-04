@@ -1,36 +1,26 @@
 import Axios from "axios";
 import { message } from "antd";
-import * as Types from "./actionTypes.js"; // Ensure you import your action types correctly
+import { createAsyncThunk } from "@reduxjs/toolkit";
 
-export const getAllCategories = () => async (dispatch) => {
-  let response = {
-    status: false,
-    message: "",
-    isLoading: true,
-    categories: null,
-  };
-
-  dispatch({ type: Types.CATEGORIES_FETCH_INIT, payload: response });
-
-  try {
-    const res = await Axios.get(
-      `${process.env.REACT_APP_BASE_API_URI_DEV}api/application/allCategories`
-    );
-
-    const { categories, message, success } = res.data;
-
-    response.message = message;
-    response.status = success;
-    response.categories = success ? categories : null;
-  } catch (err) {
-    const errorMessage = err.response?.data?.message || "Probleme serveur";
-    response.message = errorMessage;
-    message.error(errorMessage);
-    console.error(errorMessage);
-  } finally {
-    response.isLoading = false;
-    dispatch({ type: Types.CATEGORIES_FETCH_COMPLETE, payload: response });
+export const getAllCategories = createAsyncThunk(
+  "application/fetchCategories",
+  async ({ accessToken, page = 1, limit = 5 }, { rejectWithValue }) => {
+    try {
+      const res = await Axios.get(
+        `${process.env.REACT_APP_BASE_API_URI_DEV}api/application/category/getAll`,
+        {
+          headers: {
+            "Content-Type": "multipart/form-data",
+            Authorization: `Bearer ${accessToken}`,
+          },
+          params: { page, limit },
+        }
+      );
+      return res.data;
+    } catch (err) {
+      const errorMessage = err.response?.data?.message || "Problème serveur";
+      message.error(errorMessage);
+      return rejectWithValue(errorMessage);
+    }
   }
-
-  return response;
-};
+);

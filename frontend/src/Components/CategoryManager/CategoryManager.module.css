@@ -1,0 +1,13 @@
+.navbarMobile {
+  position: absolute;
+  display: none;
+  bottom: 10px;
+  width: -webkit-fill-available;
+  background: #001529;
+  border-radius: 50px;
+  min-height: 50px;
+  display: flex;
+  color: white;
+  justify-content: center;
+  align-items: center;
+}

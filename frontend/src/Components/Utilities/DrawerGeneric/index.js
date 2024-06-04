@@ -1,18 +1,17 @@
 import { Drawer } from "antd";
 import React from "react";
-import { useSelector } from "react-redux";
+import useFontFamily from "../../../Utilities/useFontFamily";
 
-const DrawerGeneric = ({ titre, open, onClose, children, style }) => {
-  const language = useSelector((state) => state.application.language);
+const DrawerGeneric = ({ titre, open, onClose, children, style, width }) => {
+  const fontFamilyLight = useFontFamily("Light");
 
   return (
     <Drawer
       style={{ ...style, overflow: "none" }}
-      title={titre}
+      title={<p style={{ fontFamily: fontFamilyLight }}>{titre}</p>}
       onClose={onClose}
       open={open}
-      placement={language === "ar" ? "left" : "right"}
-      width="400px"
+      width={width || "500px"}
     >
       {children}
     </Drawer>

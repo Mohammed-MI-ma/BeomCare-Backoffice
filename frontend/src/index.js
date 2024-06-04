@@ -7,6 +7,8 @@ import { BrowserRouter as Router } from "react-router-dom";
 import { Provider } from "react-redux";
 import App from "./App";
 import Store from "./store";
+import "react-loading-skeleton/dist/skeleton.css";
+
 import "animate.css";
 
 import "react-phone-number-input/style.css";

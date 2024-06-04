@@ -2,7 +2,6 @@ import React, { useEffect } from "react";
 import HomePage from "../HomePage";
 import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import SelectCategories from "../../Components/Utilities/SelectCatogories";
 import DatePickerCatogories from "../../Components/Utilities/DatePickerCatogories";
 import useFontFamily from "../../Utilities/useFontFamily";
 import TablePartners from "../../Components/Utilities/TablePartners";
@@ -27,7 +26,6 @@ const AdminContent = () => {
   return (
     <div className="flex gap-10 flex-col" style={{ overflow: "hidden" }}>
       <div>
-        <SelectCategories />
         <DatePickerCatogories />
       </div>
       <div>

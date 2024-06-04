@@ -1,29 +1,31 @@
-import React from "react";
+import React, {
+  Suspense,
+  lazy,
+  useEffect,
+  useState,
+  useTransition,
+} from "react";
 import HomePage from "../HomePage";
-import { Avatar, Button, ConfigProvider, List } from "antd";
+import { Alert, Button, Checkbox, ConfigProvider } from "antd";
+import Skeleton from "react-loading-skeleton";
+
 import useFontFamily from "../../Utilities/useFontFamily";
 import CenteredFlexComponent from "../../Components/Utilities/CenteredFlexComponent";
-import ResponsiveIcon from "../../Components/Utilities/ResponsiveIcon";
-
+import { AppstoreAddOutlined, FileAddOutlined } from "@ant-design/icons";
+import { CiMenuKebab } from "react-icons/ci";
+import Marquee from "react-fast-marquee";
+import style from "./editorPage.module.css";
 //__users Icons
-import users30x30 from "../../Assets/images/BeomPartner/mage_notification-bell/mage_notification-bell_low.webp";
-import users60x60 from "../../Assets/images/BeomPartner/mage_notification-bell/mage_notification-bell_medium.webp";
-import users120x120 from "../../Assets/images/BeomPartner/mage_notification-bell/mage_notification-bell_high.webp";
 //__Settings Icons
-import settings30x30 from "../../Assets/images/BeomPartner/settings-icon/iconamoon_settings-thin_small.png";
-import settings60x60 from "../../Assets/images/BeomPartner/settings-icon/iconamoon_settings-thin_medium.png";
-import settings120x120 from "../../Assets/images/BeomPartner/settings-icon/iconamoon_settings-thin_medium_large.png";
-
-const iconBell = [
-  { src: users30x30, width: 30 },
-  { src: users60x60, width: 60, default: true },
-  { src: users120x120, width: 120 },
-];
-const iconSettings = [
-  { src: settings30x30, width: 30 },
-  { src: settings60x60, width: 60, default: true },
-  { src: settings120x120, width: 120 },
-];
+import { useTranslation } from "react-i18next";
+import CategoryManager from "../../Components/CategoryManager";
+import { useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
+import AnimatesIcon from "../../Components/Utilities/AnimatedIcon";
+import CategoriesList from "./CategoriesList";
+const AddCategoryComponent = lazy(() =>
+  import("../../Components/AddCategoryComponent")
+);
 
 const EditorPage = () => {
   return <HomePage mainContent={<EditorContent />} />;
@@ -31,13 +33,37 @@ const EditorPage = () => {
 
 export default EditorPage;
 const EditorContent = () => {
-  const fontFamilyMedium = useFontFamily("ExtraLight");
-  const fontFamilySemiBold = useFontFamily("SemiBold");
+  const { t } = useTranslation();
+  const isUserLoggedIn = useSelector((state) => state.auth.isUserLoggedIn);
+  const navigate = useNavigate();
 
-  const data = [];
+  const fontFamilyLight = useFontFamily("Light");
+  const fontFamilyMedium = useFontFamily("Medium");
+
+  const [isOpenDrawer, setIsOpenDrawer] = useState(false);
+  const [isPending, startTransition] = useTransition();
+
+  const toggleDrawer = (state) => {
+    startTransition(() => {
+      setIsOpenDrawer(state);
+    });
+  };
+  useEffect(() => {
+    if (!isUserLoggedIn) {
+      navigate("/");
+    }
+  }, [isUserLoggedIn, navigate]);
+
+  const pagination = useSelector((state) => state.application.pagination);
+  const isGettingCategories = useSelector(
+    (state) => state.application.isGettingCategories
+  );
   return (
     <ConfigProvider
       theme={{
+        token: {
+          colorPrimary: "#0b57d0",
+        },
         components: {
           List: {
             itemPadding: 20,
@@ -46,97 +72,99 @@ const EditorContent = () => {
       }}
     >
       <div
-        className="flex gap-10 flex-col w-full"
+        className={`flex gap-10 flex-col w-full `}
         style={{ overflow: "hidden" }}
       >
-        <div className="w-full flex justify-between align-center">
-          <h1
-            style={{
-              fontFamily: fontFamilySemiBold,
-              fontSize: "20px",
-            }}
-          >
-            Liste des Catégories{" "}
-          </h1>
-          <Button
-            style={{
-              fontFamily: fontFamilyMedium,
-              background: "black",
-              borderRadius: "10px",
-            }}
-          >
-            Ajouter catégorie{" "}
-          </Button>
-        </div>
-        <div className="w-full">
-          <div id="pornp">
-            <List
-              itemLayout="horizontal"
-              bordered
-              dataSource={data}
-              renderItem={(item, index) => (
-                <List.Item>
-                  <List.Item.Meta
-                    avatar={
-                      <Avatar
-                        src={`https://api.dicebear.com/7.x/miniavs/svg?seed=${index}`}
-                      />
-                    }
-                    title={<a href="https://ant.design">{item.title}</a>}
-                    description="Ant Design, a design language for background applications, is refined by Ant UED Team"
-                  />
-                  <CenteredFlexComponent>
-                    <Button
-                      type="default"
-                      shape="circle"
-                      style={{
-                        fontFamily: fontFamilyMedium,
-                        display: "flex",
-                        flexDirection: "row",
-                        alignItems: "center",
-                      }}
-                    >
-                      <Avatar
-                        size={"default"}
-                        style={{
-                          fontFamily: fontFamilyMedium,
-                          background: "#F0EFEF",
-                        }}
-                      >
-                        <ResponsiveIcon alt="Bell icon" images={iconBell} />
-                      </Avatar>{" "}
-                    </Button>
-
-                    <Button
-                      type="default"
-                      shape="circle"
-                      style={{
-                        fontFamily: fontFamilyMedium,
-                        display: "flex",
-                        flexDirection: "row",
-                        alignItems: "center",
-                      }}
-                    >
-                      <Avatar
-                        size={"default"}
-                        style={{
-                          fontFamily: fontFamilyMedium,
-                          background: "#F0EFEF",
-                        }}
-                      >
-                        <ResponsiveIcon
-                          alt="Settings icon"
-                          images={iconSettings}
-                        />
-                      </Avatar>
-                    </Button>
-                  </CenteredFlexComponent>
-                </List.Item>
-              )}
+        <div
+          className={`w-full flex justify-between align-center gap-10  ${style.topMenuBar}`}
+        >
+          <section>
+            <h1
+              style={{
+                fontFamily: fontFamilyMedium,
+                fontSize: "var(--font-small-size)",
+                display: "flex",
+                gap: "var(--gap-small)",
+                color: "var(--color-text-secondary)",
+              }}
+            >
+              {t("Catégories BeomCare")}
+            </h1>
+            <Alert
+              banner
+              type="info"
+              message={
+                <Marquee pauseOnHover gradient={false}>
+                  <p
+                    style={{
+                      fontFamily: fontFamilyLight,
+                      fontSize: "var(--font-tiny-size)",
+                    }}
+                  >
+                    {t(
+                      "Rappel : Le compte suivant a uniquement accès à la création de nouvelles catégories sous l'autorisation de l'administrateur. Aucune catégorie nouvellement créée ne sera partagée avec le public sans la confirmation de l'administrateur."
+                    )}
+                  </p>
+                </Marquee>
+              }
             />
+          </section>
+          <div style={{ display: "flex", alignItems: "center" }}>
+            <Button
+              loading={isPending}
+              type="primary"
+              onClick={() => toggleDrawer(true)}
+              className="w-full  flex bg-white flex-row items-center justify-center shadow-lg border-black border rounded-lg h-12"
+              style={{
+                fontFamily: fontFamilyMedium,
+                color: "var(--color-text-secondary)",
+              }}
+            >
+              {t("Ajouter nouvelle catégorie")}
+            </Button>
+          </div>
+        </div>
+        <div className="w-full gap-5 flex flex-col">
+          <div>
+            <CenteredFlexComponent
+              className="gap-1 "
+              style={{ justifyContent: "flex-start" }}
+            >
+              {isGettingCategories ? (
+                <Skeleton
+                  height={15}
+                  width={10}
+                  borderRadius={50}
+                  className="shadow-lg"
+                />
+              ) : (
+                pagination?.totalItems
+              )}
+
+              <p
+                style={{
+                  fontFamily: fontFamilyLight,
+                  fontSize: "var(--font-tiny-size)",
+                }}
+              >
+                {t("Catégorie(s)")}
+              </p>
+            </CenteredFlexComponent>
+            <CategoriesList />
           </div>
         </div>
       </div>
+
+      <Suspense fallback={<div>Loading...</div>}>
+        {isOpenDrawer && (
+          <AddCategoryComponent
+            isOpenDrawer={isOpenDrawer}
+            onCloseHandler={() => toggleDrawer(false)}
+          >
+            <CategoryManager />
+          </AddCategoryComponent>
+        )}
+      </Suspense>
     </ConfigProvider>
   );
 };

@@ -5,6 +5,8 @@ import { Link, useNavigate } from "react-router-dom";
 import useFontFamily from "../../Utilities/useFontFamily";
 import HorizontalScroll from "../../Components/HorizontalScroll";
 import { FaCheck } from "react-icons/fa";
+import { DoubleRightOutlined } from "@ant-design/icons";
+
 import { ActionButton } from "../../Components/NavigationBar/NavbarActionsButtons";
 import style from "./landingPage.module.css";
 const LandingPage = () => {
@@ -14,6 +16,7 @@ const LandingPage = () => {
   const navigate = useNavigate();
   const fontFamilyBold = useFontFamily("SemiBold");
   const fontFamilyLight = useFontFamily("Light");
+  const fontFamilyMedium = useFontFamily("Medium");
 
   useEffect(() => {
     if (isUserLoggedIn) {
@@ -26,12 +29,14 @@ const LandingPage = () => {
       className={`${style.mainContent} flex items-center flex-col text-center justify-center relative`}
     >
       <div className="h-1/2 w-full flex items-center flex-col text-center justify-start p-20 ">
-        <h3 style={{ fontSize: "20px" }}>Veuillez sélectionner votre</h3>{" "}
+        <h3 style={{ fontSize: "14px", fontFamily: fontFamilyLight }}>
+          Veuillez sélectionner votre
+        </h3>
         <h1
           style={{ fontFamily: fontFamilyBold }}
           className={`${style.userType} `}
         >
-          TYPE D'UTILISATEUR
+          Type d'utilisateur
         </h1>
       </div>
       <div className="flex-grow h-1/2 w-full flex shadow-lg items-center flex-col text-center justify-end p-20 rounded relative ">
@@ -47,21 +52,22 @@ const LandingPage = () => {
             >
               <FaCheck />
               &nbsp;
-              <h3 style={{ fontSize: "12px", fontFamily: fontFamilyLight }}>
+              <h3 style={{ fontSize: "12px", fontFamily: fontFamilyMedium }}>
                 {mission.desc}
               </h3>
             </div>
           ))}
           <ActionButton
             style={{
-              background: "transparent",
+              background: "rgba(11,87,208,0.07)",
+              color: "rgba(4,30,73,0.7)",
               marginTop: "20px",
-              fontFamily: fontFamilyLight,
+              fontFamily: fontFamilyBold,
             }}
           >
-            <u>
-              <Link to="/beom/account/log-in">Y accéder</Link>
-            </u>
+            <Link to="/beom/account/log-in">
+              <DoubleRightOutlined />Y accéder
+            </Link>
           </ActionButton>
         </div>
       </div>

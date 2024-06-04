@@ -1,14 +1,5 @@
 /* eslint-disable no-template-curly-in-string */
-import {
-  Avatar,
-  Button,
-  Divider,
-  Form,
-  Image,
-  Input,
-  Spin,
-  message,
-} from "antd";
+import { Button, Divider, Form, Input, Spin, message } from "antd";
 import React, { useEffect, useState } from "react";
 import useFontFamily from "../../Utilities/useFontFamily";
 import { useTranslation } from "react-i18next";
@@ -153,8 +144,6 @@ const LoginPage = () => {
               className={style.header}
               style={{
                 fontFamily: fontFamilyLight,
-                textAlign: "center",
-                marginBottom: "11px",
               }}
             >
               {t("Je suis un ")}
@@ -165,7 +154,7 @@ const LoginPage = () => {
                   fontFamily: fontFamilyBold,
                 }}
               >
-                <u>modifier</u>
+                <u>{t("modifier")}</u>
               </Link>
             </h1>
             <div
@@ -367,7 +356,7 @@ const FreeRegistration = ({ style }) => {
         textAlign: "center",
       }}
     >
-      {t("En cas de besoin, contactez le support")}
+      {t("En cas de besoin, contactez le support BeomCare")}
     </p>
   );
 };

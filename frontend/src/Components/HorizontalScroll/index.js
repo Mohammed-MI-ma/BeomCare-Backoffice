@@ -9,6 +9,7 @@ import { GrUserAdmin, GrArticle } from "react-icons/gr";
 import { TbUsers } from "react-icons/tb";
 import { useDispatch, useSelector } from "react-redux";
 import { setRoleSelected } from "../../Reducers/applicationService/applicationSlice";
+import { SelectOutlined } from "@ant-design/icons";
 
 export const partners = [
   {
@@ -50,6 +51,36 @@ export const partners = [
       {
         id: 2,
         desc: "Coordonner des événements de marketing conjoints.",
+      },
+    ],
+  },
+  {
+    id: "someOther",
+    title: "someOther",
+    icon: <GrArticle size={40} />,
+    missions: [
+      {
+        id: 1,
+        desc: "Réviser le contenu",
+      },
+      {
+        id: 2,
+        desc: "Développer des idées de contenu.",
+      },
+    ],
+  },
+  {
+    id: "someOther1",
+    title: "someOther1",
+    icon: <GrArticle size={40} />,
+    missions: [
+      {
+        id: 1,
+        desc: "Réviser le contenu",
+      },
+      {
+        id: 2,
+        desc: "Développer des idées de contenu.",
       },
     ],
   },
@@ -109,7 +140,10 @@ const HorizontalScroll = ({ style }) => {
           ❯
         </motion.button>
       </div>
-      <div className={styles.scrollableContent} ref={scrollRef}>
+      <div
+        className={`${styles.scrollableContent} shadow-lg rounded `}
+        ref={scrollRef}
+      >
         {partners.map((partner, index) => (
           <motion.div
             id={partner.id}
@@ -117,7 +151,16 @@ const HorizontalScroll = ({ style }) => {
             className={styles.item}
             style={{
               cursor: "pointer",
-              border: partner.id === roleSelected?.id ? "1px solid black" : "",
+              backgroundColor:
+                partner.id === roleSelected?.id
+                  ? "rgba(4,30,73,0.05)"
+                  : "white",
+              border:
+                partner.id === roleSelected?.id ? "2px solid #0b57d0" : "",
+              color:
+                partner.id === roleSelected?.id
+                  ? "#0b57d0"
+                  : "rgba(4, 30, 73, 0.7)",
             }}
             initial={{ x: 100, opacity: 0 }}
             animate={{ x: 0, opacity: 1 }}
@@ -137,7 +180,17 @@ const HorizontalScroll = ({ style }) => {
           >
             {partner.icon}
             <div style={{ maxWidth: "230px" }}>
-              <h1 style={{ fontFamily: fontFamilyLight }}>{partner.title}</h1>
+              <h1
+                style={{
+                  fontFamily: fontFamilyLight,
+                  color: partner.id === roleSelected?.id ? "#0b57d0" : "",
+                }}
+              >
+                <p style={{ fontFamily: fontFamilyLight, fontSize: "12px" }}>
+                  Je suis
+                </p>{" "}
+                {partner.title}
+              </h1>
               <Button
                 type="link"
                 style={{
@@ -147,11 +200,22 @@ const HorizontalScroll = ({ style }) => {
                   justifyContent: "center",
                   alignItems: "center",
                   gap: "10px",
-                  color: "black",
+                  width: "100%",
                 }}
               >
-                <p>{t("Sélectionner")}</p>
-                <CustomDivider color="#001529" />
+                <p
+                  style={{
+                    fontFamily: fontFamilyLight,
+                    fontSize: "12px",
+                    color:
+                      partner.id === roleSelected?.id
+                        ? "#0b57d0"
+                        : "rgba(4, 30, 73, 0.7)",
+                  }}
+                >
+                  {t("cliquer sur la carte")}
+                </p>
+                <SelectOutlined />
               </Button>
             </div>
           </motion.div>

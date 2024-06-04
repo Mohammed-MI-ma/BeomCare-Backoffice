@@ -22,7 +22,16 @@ const authSlice = createSlice({
   reducers: {
     logout: (state) => {
       localStorage.clear();
-      return initialState;
+      state.userInfo = initialState.userInfo;
+      state.accessToken = initialState.accessToken;
+      state.refreshToken = initialState.refreshToken;
+      state.registerData = initialState.registerData;
+      state.loginData = initialState.loginData;
+      state.error = initialState.error;
+      state.success = initialState.success;
+      state.forgotPasswordData = initialState.forgotPasswordData;
+      state.isUserLoggedIn = initialState.isUserLoggedIn;
+      state.loading = initialState.loading;
     },
     setForgotPasswordData: (state, { payload }) => {
       state.forgotPasswordData = payload;

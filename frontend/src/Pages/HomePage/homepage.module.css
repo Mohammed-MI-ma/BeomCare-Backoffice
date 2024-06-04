@@ -8,15 +8,36 @@
   align-items: center;
   justify-content: flex-start;
   flex-direction: column;
+  color: rgba(4, 30, 73, 0.7);
 }
+.content {
+  padding: 0px 24px;
+  min-height: 280px;
+}
+.navbarMobile {
+  width: 100%;
+  min-height: 50px;
+  display: none;
+  justify-content: center;
+  align-items: center;
+  background-color: black;
+}
+
 /* Styles for small devices (phones) */
 @media (max-width: 36rem) {
+  .navbarMobile {
+    display: flex;
+  }
   .sider,
   .sider > div:nth-child(1) {
     display: none;
   }
   .layout {
     width: 100%;
+  }
+  .content {
+    padding: 0px 0px;
+    min-height: 280px;
   }
 }
 .submitButton {

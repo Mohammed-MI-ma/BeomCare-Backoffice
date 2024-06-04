@@ -1,11 +1,19 @@
 import React, { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useDispatch, useSelector } from "react-redux";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import useFontFamily from "../../Utilities/useFontFamily";
-import { Avatar, Breadcrumb, Button, Divider, Layout } from "antd";
+import { Avatar, Button, Divider, Layout } from "antd";
 import style from "./homepage.module.css";
+import { LuPlus } from "react-icons/lu";
+
 import { logout } from "../../Reducers/authService/authSlice";
+import {
+  MailOutlined,
+  LogoutOutlined,
+  RightOutlined,
+  AntDesignOutlined,
+} from "@ant-design/icons";
 
 const { Content, Sider } = Layout;
 
@@ -16,7 +24,7 @@ const HomePage = ({ mainContent }) => {
   const { t, ready, error } = useTranslation();
   const userInfo = useSelector((state) => state.auth.userInfo);
   const fontFamilyLight = useFontFamily("ExtraLight");
-
+  const fontFamilyMedium = useFontFamily("Medium");
   useEffect(() => {
     const updateOnlineStatus = () => setIsOnline(navigator.onLine);
 
@@ -58,23 +66,181 @@ const HomePage = ({ mainContent }) => {
   }
 
   return (
-    <section style={{ flex: 1 }}>
+    <div style={{ flex: 1 }}>
+      <section id="partnersSection" className="w-full block md:hidden">
+        <header
+          className="flex items-center justify-between w-full"
+          style={{
+            fontSize: "var(--font-small-size)",
+            fontFamily: fontFamilyMedium,
+          }}
+        >
+          <h1 className="p-4" style={{ color: "var(--color-text-secondary)" }}>
+            {t("Abonnés sur BeomCare")}
+          </h1>
+          <Link className="p-4 flex " style={{ color: "var(--color-blue)" }}>
+            <p>{t("Voir Plus")}</p>
+            <RightOutlined style={{ width: 10 }} />
+          </Link>
+        </header>
+        <div className="flex ">
+          <div className="inline-flex flex-col items-center">
+            <div className="flex ">
+              <div
+                className="shadow-lg flex justify-center items-center"
+                style={{
+                  borderRadius: "50%",
+                  width: "60px",
+                  height: "60px",
+                  background: "var(--color-text-secondary)",
+                  color: "white",
+                }}
+              >
+                <LuPlus />
+              </div>
+              <Divider
+                type="vertical"
+                style={{ background: "black", height: "100%" }}
+              />
+            </div>
+          </div>
+          <div
+            className="w-screen min-h-[100px]  overflow-x-auto whitespace-nowrap"
+            style={{ scrollbarWidth: "none", msOverflowStyle: "none" }}
+          >
+            <div className="inline-flex  flex-col items-center">
+              <Avatar
+                size={{
+                  xs: 60,
+                  sm: 60,
+                  md: 60,
+                  lg: 64,
+                  xl: 80,
+                  xxl: 100,
+                }}
+                icon={<AntDesignOutlined />}
+              />
+              <p style={{ fontSize: "var(--font-tiny-size)" }}>qsdqsd</p>
+            </div>{" "}
+            <div className="inline-flex  flex-col items-center">
+              <Avatar
+                size={{
+                  xs: 60,
+                  sm: 60,
+                  md: 60,
+                  lg: 64,
+                  xl: 80,
+                  xxl: 100,
+                }}
+                icon={<AntDesignOutlined />}
+              />
+              <p style={{ fontSize: "var(--font-tiny-size)" }}>qsdqsd</p>
+            </div>{" "}
+            <div className="inline-flex  flex-col items-center">
+              <Avatar
+                size={{
+                  xs: 60,
+                  sm: 60,
+                  md: 60,
+                  lg: 64,
+                  xl: 80,
+                  xxl: 100,
+                }}
+                icon={<AntDesignOutlined />}
+              />
+              <p style={{ fontSize: "var(--font-tiny-size)" }}>qsdqsd</p>
+            </div>{" "}
+            <div className="inline-flex  flex-col items-center">
+              <Avatar
+                size={{
+                  xs: 60,
+                  sm: 60,
+                  md: 60,
+                  lg: 64,
+                  xl: 80,
+                  xxl: 100,
+                }}
+                icon={<AntDesignOutlined />}
+              />
+              <p style={{ fontSize: "var(--font-tiny-size)" }}>qsdqsd</p>
+            </div>{" "}
+            <div className="inline-flex  flex-col items-center">
+              <Avatar
+                size={{
+                  xs: 60,
+                  sm: 60,
+                  md: 60,
+                  lg: 64,
+                  xl: 80,
+                  xxl: 100,
+                }}
+                icon={<AntDesignOutlined />}
+              />
+              <p style={{ fontSize: "var(--font-tiny-size)" }}>qsdqsd</p>
+            </div>{" "}
+            <div className="inline-flex  flex-col items-center">
+              <Avatar
+                size={{
+                  xs: 60,
+                  sm: 60,
+                  md: 60,
+                  lg: 64,
+                  xl: 80,
+                  xxl: 100,
+                }}
+                icon={<AntDesignOutlined />}
+              />
+              <p style={{ fontSize: "var(--font-tiny-size)" }}>qsdqsd</p>
+            </div>{" "}
+            <div className="inline-flex  flex-col items-center">
+              <Avatar
+                size={{
+                  xs: 60,
+                  sm: 60,
+                  md: 60,
+                  lg: 64,
+                  xl: 80,
+                  xxl: 100,
+                }}
+                icon={<AntDesignOutlined />}
+              />
+              <p style={{ fontSize: "var(--font-tiny-size)" }}>qsdqsd</p>
+            </div>{" "}
+            <div className="inline-flex  flex-col items-center">
+              <Avatar
+                size={{
+                  xs: 60,
+                  sm: 60,
+                  md: 60,
+                  lg: 64,
+                  xl: 80,
+                  xxl: 100,
+                }}
+                icon={<AntDesignOutlined />}
+              />
+              <p style={{ fontSize: "var(--font-tiny-size)" }}>qsdqsd</p>
+            </div>{" "}
+          </div>
+        </div>
+      </section>
+      <Divider />
       <MainContent
         userInfo={userInfo}
         fontFamilyLight={fontFamilyLight}
         mainContent={mainContent}
       />
-    </section>
+    </div>
   );
 };
 
 const MainContent = ({ userInfo, fontFamilyLight, mainContent }) => (
-  <section id="main-content" className="flex items-center flex-col">
+  <section id="main-content" className="flex items-center flex-col ">
     <section
       style={{
         margin: 0,
         height: "calc(100vh - 90px)",
         position: "relative",
+        background: "#ffffff1c",
       }}
       className={`${style.layout} bg-cover relative mb-5 flex items-center justify-center flex-col-reverse lg:flex-row w-full`}
     >
@@ -88,8 +254,8 @@ const MainContent = ({ userInfo, fontFamilyLight, mainContent }) => (
               userInfo={userInfo}
               fontFamilyLight={fontFamilyLight}
             />
-            <Content style={{ padding: "0 24px", minHeight: 280 }}>
-              <div className="flex flex-col md:flex-row space-y-4 md:space-y-0 md:space-x-4 p-4">
+            <Content className={`${style.content} bg-white`}>
+              <div className="flex flex-col md:flex-row rounded border space-y-4 md:space-y-0 md:space-x-4 p-4">
                 {mainContent}
               </div>
             </Content>
@@ -104,6 +270,8 @@ const CustomSider = ({ userInfo, fontFamilyLight }) => {
   const { t } = useTranslation();
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const fontFamilyBold = useFontFamily("SemiBold");
+  const fontFamilyMedium = useFontFamily("Medium");
 
   //__ACTIONS
   const logoutAction = async () => {
@@ -117,43 +285,53 @@ const CustomSider = ({ userInfo, fontFamilyLight }) => {
     }
   };
   return (
-    <Sider
-      className={`${style.sider}`}
-      style={{ color: "white", fontFamily: fontFamilyLight }}
-    >
-      <Avatar
-        size={50}
-        className="mt-10"
+    <>
+      <Sider
+        className={`${style.sider} shadow-lg`}
         style={{
-          border: "1px solid white",
-          fontSize: "12px",
+          color: "white",
           fontFamily: fontFamilyLight,
-          textTransform: "uppercase",
+          borderRight: "1px solid rgba(4, 30, 73, 0.3)",
         }}
       >
-        {userInfo?.role}
-      </Avatar>
-      <div>
-        <small>{userInfo?.email}</small>
-        <small>{userInfo?.phoneNumber}</small>
-      </div>
-      <div className="absolute" style={{ bottom: 0, color: "white" }}>
-        <Divider
-          style={{
-            width: "100%",
-            backgroundColor: "white",
-            height: "2px",
-          }}
-        />
-        <Button
-          onClick={logoutAction}
-          type="link"
-          style={{ fontFamily: fontFamilyLight, color: "white" }}
-        >
-          {t("se déconnecter")}
-        </Button>
-      </div>
-    </Sider>
+        <p style={{ textTransform: "capitalize" }}>{userInfo?.role}</p>
+        <div>
+          <p style={{ fontFamily: fontFamilyBold, fontSize: "12px" }}>
+            <div
+              style={{
+                display: "flex",
+                justifyContent: "center",
+                alignItems: "center",
+                gap: "5px",
+              }}
+            >
+              <MailOutlined />
+              <p>{userInfo?.email}</p>
+            </div>
+          </p>
+        </div>
+        <div className="absolute" style={{ bottom: 0, color: "white" }}>
+          <Divider
+            style={{
+              width: "100%",
+              backgroundColor: "white",
+              height: "2px",
+            }}
+          />
+          <Button
+            onClick={logoutAction}
+            type="link"
+            style={{
+              fontFamily: fontFamilyMedium,
+              color: "rgba(4, 30, 73, 1)",
+            }}
+            icon={<LogoutOutlined />}
+          >
+            {t("se déconnecter")}
+          </Button>
+        </div>
+      </Sider>
+    </>
   );
 };
 

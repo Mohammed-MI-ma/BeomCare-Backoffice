@@ -22,6 +22,9 @@
   --color-secondary: #1d3034; /* Secondary color:Gray */
   --color-accent: #fefefe; /* Accent color */
   --color-text: #000000; /* Text color */
+
+  --color-blue: rgb(11, 87, 208);
+  --color-text-secondary: #041e49b3;
 }
 /* Gap Sizes */
 :root {
@@ -141,5 +144,25 @@ a:active {
   margin-bottom: 16px;
 }
 .ant-layout-sider {
-  background-color: #000000 !important;
+  background-color: rgb(255, 255, 255) !important;
+}
+input,
+.ant-input {
+  font-family: "Primary-Light" !important;
+}
+.ant-alert-warning,
+.ant-alert-info {
+  background: #000000;
+  color: white;
+  border: 1px solid #ffffff;
+}
+.ant-alert-info .ant-alert-icon,
+.ant-alert .ant-alert-close-icon .anticon-close,
+.ant-alert-with-description .ant-alert-message,
+.ant-alert-with-description .ant-alert-description {
+  color: #ffffff;
+}
+.ant-checkbox-checked .ant-checkbox-inner {
+  background-color: #000000;
+  border-color: #000000;
 }
