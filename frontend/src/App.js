@@ -16,6 +16,7 @@ import { useTranslation } from "react-i18next";
 import { useDispatch, useSelector } from "react-redux";
 import SettingsAdminDrawer from "./Components/SettingsAdminDrawer";
 import { setDrawerOpenSettings } from "./Reducers/applicationService/applicationSlice";
+import * as serviceWorkerRegistration from "./serviceWorkerRegistration";
 
 function App() {
   const [appIsReady, setAppIsReady] = useState(false);
@@ -27,7 +28,7 @@ function App() {
   const openSettings = useSelector(
     (state) => state.application.drawerOpenSettings
   );
-  const isUserLoggedIn = useSelector((state) => state.auth.drawerOpenSettings);
+  const isUserLoggedIn = useSelector((state) => state.auth.isUserLoggedIn);
   //__settings_drawer
   const onClose = () => d(setDrawerOpenSettings(false));
   useEffect(() => {

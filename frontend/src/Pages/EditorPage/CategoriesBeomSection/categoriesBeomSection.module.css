@@ -1,42 +1,32 @@
 .topMenuBar {
   flex-direction: row;
 }
-.statisticsContainer {
+
+.scrollableContent {
+  display: flex;
+  overflow-x: scroll;
+  scroll-behavior: smooth;
+  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none; /* Firefox */
+  padding: 10px 10px;
+  width: 600px;
 }
-.submitButton {
-  background: var(--color-accent);
-  color: var(--color-primary);
-  font-size: 13px;
-  width: 100%;
+.scrollableContent::-webkit-scrollbar {
+  display: none; /* Chrome, Safari, Opera */
 }
-.statisticsContainer > section:nth-child(1) {
-  width: 75%;
-}
-.statisticsContainer > section:nth-child(2) {
-  width: 25%;
-}
+
 /* Styles for small devices (phones) */
 @media (max-width: 36rem) {
   .topMenuBar {
     flex-direction: column;
   }
-  .statisticsContainer {
-    flex-direction: column;
-  }
-  .statisticsContainer > section:nth-child(1) {
-    width: 100%;
-    overflow: auto;
-  }
-  .statisticsContainer > section:nth-child(2) {
+  .scrollableContent {
     width: 100%;
   }
 }
 
 /* Styles for small devices (tablets) */
 @media (min-width: 36.063rem) and (max-width: 48rem) {
-  .sider {
-    display: none;
-  }
 }
 
 /* Styles for medium devices (laptops and desktops) */

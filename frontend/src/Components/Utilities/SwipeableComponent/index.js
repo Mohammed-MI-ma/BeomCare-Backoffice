@@ -6,6 +6,8 @@ import { Button } from "antd";
 import { useTranslation } from "react-i18next";
 import { GrValidate } from "react-icons/gr";
 import useFontFamily from "../../../Utilities/useFontFamily";
+import { FaRegTrashAlt } from "react-icons/fa";
+import { MdOutlineEdit } from "react-icons/md";
 
 const SwipeableComponent = ({
   onSwipeLeft,
@@ -55,17 +57,29 @@ const SwipeableComponent = ({
             </div>
             <div
               id="tools"
-              className="flex-1 flex justify-between items-center px-10 gap-2"
+              className="flex-1 flex justify-between items-center px-10 "
             >
               <Button
                 disabled={isValid}
-                className="button w-full"
-                style={{ fontFamily: fontFamilyLight, color: "black" }}
+                className="button "
+                style={{
+                  fontFamily: fontFamilyLight,
+                  color: "black",
+
+                  background: isValid ? "var(--color-verified)" : "",
+                }}
                 icon={<GrValidate />}
               >
-                {!isValid
-                  ? t("Envoyer pour Validation")
-                  : t("Catégorie déja validée")}
+                {!isValid ? t("Valider?") : t("Validée")}
+              </Button>
+              {!isValid && (
+                <Button>
+                  <FaRegTrashAlt style={{ color: "black" }} />
+                </Button>
+              )}
+
+              <Button>
+                <MdOutlineEdit style={{ color: "black" }} />
               </Button>
             </div>
           </div>

@@ -7,7 +7,7 @@ import PropTypes from "prop-types";
 import useFontFamily from "../../../Utilities/useFontFamily";
 
 import { Alert, Avatar, Button, Divider, Input, message } from "antd";
-import { TagOutlined } from "@ant-design/icons";
+import { FcCamera } from "react-icons/fc";
 
 import { Label } from "../../Utilities/Label";
 import AnimatesIcon from "../../Utilities/AnimatedIcon";
@@ -40,6 +40,7 @@ const CategoryDetails = ({ onSave, flag }) => {
     image2: "",
     image3: "",
     image4: "",
+    image5: "",
     comment: "",
   });
 
@@ -51,6 +52,7 @@ const CategoryDetails = ({ onSave, flag }) => {
       image2: specificObject?.image2,
       image3: specificObject?.image3,
       image4: specificObject?.image4,
+      image5: specificObject?.image5,
       comment: specificObject?.comment,
     });
   }, [specificObject]);
@@ -63,7 +65,8 @@ const CategoryDetails = ({ onSave, flag }) => {
       newCategory?.image1 &&
       newCategory?.image2 &&
       newCategory?.image2 &&
-      newCategory?.image4;
+      newCategory?.image4 &&
+      newCategory?.image5;
     setIsFormValid(isValid);
   }, [newCategory]);
 
@@ -295,6 +298,27 @@ const CategoryDetails = ({ onSave, flag }) => {
           marginTop: "var(--spacing-medium)",
         }}
       >
+        {t("Bannière")}
+      </Divider>
+      <Label>
+        {t("Bannière de profil")}
+        <RedStar />
+      </Label>
+      <input
+        name="image5"
+        className="flex w-full rounded-md border border-input bg-background p-2  text-sm shadow-sm transition-colors file:border-0 file:bg-customBlue file:rounded  file:text-foreground file:text-sm file:font-medium file:text-white placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:cursor-not-allowed disabled:opacity-50"
+        id="file_input"
+        style={{ fontFamily: fontFamilyExtraLight }}
+        type="file"
+        onChange={(info) => handleFileChange(info, "image5")}
+        accept="image/webp,image/png" // Accepts only WebP and PNG image files
+      />
+      <Divider
+        style={{
+          fontFamily: fontFamilyMedium,
+          marginTop: "var(--spacing-medium)",
+        }}
+      >
         {t("Extra")}
       </Divider>
       <div className={`flex flex-col gap-5 mt-5 shadow-lg ${style.coloredBox}`}>
@@ -320,7 +344,7 @@ const CategoryDetails = ({ onSave, flag }) => {
         type="primary"
         style={{
           fontFamily: fontFamilyMedium,
-          background: "#1677ff",
+          background: "black",
           color: "white",
         }}
       >
@@ -384,7 +408,7 @@ export const FileInput = ({ label, iconSize, fieldName, onChange }) => {
       <div className="flex justify-content items-center gap-2">
         <div style={{ width: "fit-content" }}>
           <AnimatesIcon
-            icon={<TagOutlined style={{ fontSize: `${iconSize}px` }} />}
+            icon={<FcCamera style={{ fontSize: `${iconSize}px` }} />}
             animation={"tada"}
           />
         </div>

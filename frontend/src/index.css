@@ -25,6 +25,7 @@
 
   --color-blue: rgb(11, 87, 208);
   --color-text-secondary: #041e49b3;
+  --color-verified: #8cc84b;
 }
 /* Gap Sizes */
 :root {
@@ -152,7 +153,7 @@ input,
 }
 .ant-alert-warning,
 .ant-alert-info {
-  background: #000000;
+  background: var(--color-text-secondary);
   color: white;
   border: 1px solid #ffffff;
 }

@@ -1,6 +1,6 @@
 .coloredBox {
-  background: rgba(230, 244, 255, 0.275);
-  border: 1px solid rgb(145, 202, 255);
+  margin-left: 10px;
+  margin-right: 10px;
   padding: 20px;
   border-radius: 8px;
 }

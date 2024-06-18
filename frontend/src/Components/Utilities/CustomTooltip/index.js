@@ -7,6 +7,9 @@ const CustomTooltip = ({ title, children }) => {
   const { t } = useTranslation();
   const fontFamilyExtraLight = useFontFamily("ExtraLight");
 
+  // Ensure title is correctly translated
+  const translatedTitle = t(title);
+
   return (
     <Tooltip
       title={
@@ -15,7 +18,7 @@ const CustomTooltip = ({ title, children }) => {
             fontFamily: fontFamilyExtraLight,
           }}
         >
-          {t(title)}
+          {translatedTitle}
         </p>
       }
     >

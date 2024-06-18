@@ -2,17 +2,15 @@ import { Alert, Button, ConfigProvider, List, Tabs } from "antd";
 import React, { useState } from "react";
 import CategorySearchEngine from "../CategorySearchEngine";
 import useFontFamily from "../../Utilities/useFontFamily";
-import {
-  DislikeOutlined,
-  AlertOutlined,
-  LikeOutlined,
-} from "@ant-design/icons";
+import { AlertOutlined } from "@ant-design/icons";
+import { FaLockOpen, FaLock } from "react-icons/fa6";
 import { useDispatch, useSelector } from "react-redux";
 import { useTranslation } from "react-i18next";
 import AnimatesIcon from "../Utilities/AnimatedIcon";
 import { searchCategoryMeiliSearch } from "../../Reducers/applicationService/actions/category/categoryActions";
 import CategoryAddDrawer from "./CategoryAddDrawer";
 import { setNewCategoryName } from "../../Reducers/applicationService/actions/category/categorySlice";
+import ResponsiveIcon from "../Utilities/ResponsiveIcon";
 
 const CategoryManager = () => {
   const fontFamilyLight = useFontFamily("Light");
@@ -57,14 +55,53 @@ const CategoryManager = () => {
             renderItem={(item, index) => (
               <List.Item>
                 <List.Item.Meta
+                  avatar={
+                    <ResponsiveIcon
+                      alt="Category-icon"
+                      images={[
+                        { src: item?.images?.iconLow, width: 60 },
+                        {
+                          src: item?.images?.iconMedium,
+                          width: 30,
+                          default: true,
+                        },
+                        { src: item?.images?.iconHigh, width: 170 },
+                      ]}
+                    />
+                  }
                   title={
                     <h1
                       style={{
-                        fontFamily: fontFamilyLight,
+                        fontFamily: fontFamilyBold,
                       }}
                     >
                       {item?.name}
                     </h1>
+                  }
+                  description={
+                    <>
+                      <div
+                        style={{
+                          fontFamily: fontFamilyLight,
+                        }}
+                      >
+                        Desc: {item?.description}
+                      </div>
+                      <div
+                        style={{
+                          fontFamily: fontFamilyLight,
+                        }}
+                      >
+                        Créee le : {item?.createdAt}
+                      </div>
+                      <div
+                        style={{
+                          fontFamily: fontFamilyLight,
+                        }}
+                      >
+                        Crée par :{item?.createdBy}
+                      </div>
+                    </>
                   }
                 />
               </List.Item>
@@ -148,24 +185,28 @@ const CategoryManager = () => {
               icon={
                 allowedToAddNewCategory && data?.length === 0 ? (
                   <AnimatesIcon
+                    animation={"bounceIn"}
                     icon={
-                      <LikeOutlined
-                        style={{ color: "black", fontSize: "20px" }}
+                      <FaLockOpen
+                        style={{ color: "var(--color-blue)", fontSize: "20px" }}
                       />
                     }
                   />
                 ) : (
-                  <AnimatesIcon
-                    icon={
-                      <DislikeOutlined
-                        style={{
-                          color: "black",
-                          fontSize: "20px",
-                          cursor: "not-allowed",
-                        }}
-                      />
-                    }
-                  />
+                  <div>
+                    <AnimatesIcon
+                      animation={"bounceIn"}
+                      icon={
+                        <FaLock
+                          style={{
+                            color: "var(--color-blue)",
+                            fontSize: "20px",
+                            cursor: "not-allowed",
+                          }}
+                        />
+                      }
+                    />
+                  </div>
                 )
               }
               style={{

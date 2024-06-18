@@ -1,0 +1,206 @@
+import React, { createContext, useEffect, useState, useContext } from "react";
+import { io } from "socket.io-client";
+import axios from "axios";
+import { useSelector } from "react-redux";
+
+const SocketContext = createContext();
+const SubscriptionContext = createContext();
+
+export const useSocket = () => useContext(SocketContext);
+export const useSubscriptions = () => useContext(SubscriptionContext);
+
+const customSocket = io.connect(process.env.REACT_APP_BASE_API_URI_DEV);
+const SocketProvider = ({ children }) => {
+  const [socket, setSocket] = useState(null);
+  const [subscriptions, setSubscriptions] = useState([]);
+  const access_Token = useSelector((state) => state.auth.accessToken);
+
+  useEffect(() => {
+    console.log("Connecting to Socket.io server...");
+    localStorage.debug = "socket.io-client:*";
+    localStorage.debug = "*";
+    const fetchData = async () => {
+      try {
+        console.log("Fetching initial subscription data...");
+        const response = await axios.get(
+          `${process.env.REACT_APP_BASE_API_URI_DEV}api/auth/subscriptions`,
+          {
+            headers: {
+              "Content-Type": "multipart/form-data",
+              Authorization: `Bearer ${access_Token}`,
+            },
+          }
+        );
+        setSubscriptions(response.data);
+        console.log("Initial subscription data fetched:", response.data);
+      } catch (error) {
+        console.error("Error fetching initial data:", error);
+      }
+    };
+
+    fetchData();
+    console.log("porno", process.env.REACT_APP_BASE_API_URI_DEV);
+    const newSocket = io(process.env.REACT_APP_BASE_API_URI_DEV, {
+      transports: ["websocket"],
+    });
+
+    newSocket.on("connect", () => {
+      console.log("Connected to Socket.io server");
+    });
+
+    newSocket.on("disconnect", (reason) => {
+      console.log("Disconnected from Socket.io server:", reason);
+    });
+
+    newSocket.on("reconnect", (attemptNumber) => {
+      console.log(`Reconnected to Socket.io server (attempt ${attemptNumber})`);
+    });
+
+    newSocket.on("reconnect_attempt", (attemptNumber) => {
+      console.log(
+        `Attempting to reconnect to Socket.io server (attempt ${attemptNumber})`
+      );
+    });
+
+    newSocket.on("reconnect_failed", () => {
+      console.log("Reconnection to Socket.io server failed");
+    });
+
+    newSocket.on("error", (error) => {
+      console.error("Socket error:", error);
+    });
+
+    newSocket.on("newSubscription", (subscription) => {
+      console.log("Received new subscription:", subscription);
+    });
+
+    setSocket(newSocket);
+
+    // Clean up on component unmount
+    return () => {
+      console.log("Disconnecting from Socket.io server...");
+      newSocket.disconnect();
+    };
+  }, [access_Token]);
+
+  useEffect(() => {
+    customSocket.on("newSubscription", (subscription) => {
+      console.log("Received new subscription:", subscription);
+      setSubscriptions((prevSubscriptions) => [
+        ...prevSubscriptions,
+        subscription,
+      ]);
+    });
+  }, [customSocket]);
+
+  return (
+    <SocketContext.Provider value={socket}>
+      <SubscriptionContext.Provider value={subscriptions}>
+        {children}
+      </SubscriptionContext.Provider>
+    </SocketContext.Provider>
+  );
+};
+
+export default SocketProvider;
+
+//workin
+/*
+import React, { createContext, useEffect, useState, useContext } from "react";
+import { io } from "socket.io-client";
+import axios from "axios";
+import { useSelector } from "react-redux";
+
+const SocketContext = createContext();
+const SubscriptionContext = createContext();
+
+export const useSocket = () => useContext(SocketContext);
+export const useSubscriptions = () => useContext(SubscriptionContext);
+
+const SocketProvider = ({ children }) => {
+  const [socket, setSocket] = useState(null);
+  const [subscriptions, setSubscriptions] = useState([]);
+  const access_Token = useSelector((state) => state.auth.accessToken);
+
+  useEffect(() => {
+    console.log("Connecting to Socket.io server...");
+    localStorage.debug = "socket.io-client:socket";
+    const fetchData = async () => {
+      try {
+        const response = await axios.get(
+          `${process.env.REACT_APP_BASE_API_URI_DEV}api/auth/subscriptions`,
+          {
+            headers: {
+              "Content-Type": "multipart/form-data",
+              Authorization: `Bearer ${access_Token}`,
+            },
+          }
+        );
+        setSubscriptions(response.data);
+      } catch (error) {
+        console.error("Error fetching initial data:", error);
+      }
+    };
+
+    fetchData();
+    const newSocket = io.connect(process.env.REACT_APP_BASE_API_URI_DEV);
+
+    newSocket.on("connect", () => {
+      console.log("Connected to Socket.io server");
+    });
+
+    newSocket.on("disconnect", (reason) => {
+      console.log("Disconnected from Socket.io server:", reason);
+    });
+
+    newSocket.on("reconnect", (attemptNumber) => {
+      console.log(
+        "Reconnected to Socket.io server (attempt " + attemptNumber + ")"
+      );
+    });
+
+    newSocket.on("reconnect_attempt", (attemptNumber) => {
+      console.log(
+        "Attempting to reconnect to Socket.io server (attempt " +
+          attemptNumber +
+          ")"
+      );
+    });
+
+    newSocket.on("reconnect_failed", () => {
+      console.log("Reconnection to Socket.io server failed");
+    });
+
+    newSocket.on("error", (error) => {
+      console.error("Socket error:", error);
+    });
+
+    newSocket.on("newSubscription", (subscription) => {
+      console.log("Received new subscription:", subscription);
+      setSubscriptions((prevSubscriptions) => [
+        ...prevSubscriptions,
+        subscription,
+      ]);
+    });
+
+    setSocket(newSocket);
+
+    // Clean up on component unmount
+    return () => {
+      console.log("Disconnecting from Socket.io server...");
+      newSocket.disconnect();
+    };
+  }, [access_Token]);
+
+  return (
+    <SocketContext.Provider value={socket}>
+      <SubscriptionContext.Provider value={subscriptions}>
+        {children}
+      </SubscriptionContext.Provider>
+    </SocketContext.Provider>
+  );
+};
+
+export default SocketProvider;
+
+*/

@@ -25,7 +25,7 @@ const CategoryAddDrawer = ({ title, open, onClose }) => {
     >
       <div
         className={
-          "flex-col w-full gap-10 overflow-auto justify-start bordered shadow-md"
+          "flex-col w-full gap-10 overflow-auto justify-start bordered shadow-md pt-2"
         }
         style={{
           borderRadius: "var(--border-radius-large)",

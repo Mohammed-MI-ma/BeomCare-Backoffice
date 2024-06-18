@@ -58,6 +58,7 @@ const LandingPage = () => {
             </div>
           ))}
           <ActionButton
+            to="/beom/account/log-in"
             style={{
               background: "rgba(11,87,208,0.07)",
               color: "rgba(4,30,73,0.7)",
@@ -65,9 +66,7 @@ const LandingPage = () => {
               fontFamily: fontFamilyBold,
             }}
           >
-            <Link to="/beom/account/log-in">
-              <DoubleRightOutlined />Y accéder
-            </Link>
+            <DoubleRightOutlined />Y accéder
           </ActionButton>
         </div>
       </div>

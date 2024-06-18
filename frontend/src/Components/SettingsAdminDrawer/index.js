@@ -25,6 +25,7 @@ const SettingsAdminDrawer = ({ openSettings, onClose }) => {
   const fontFamilyLight = useFontFamily("Light");
   return (
     <DrawerGeneric
+      width={"300px"}
       open={openSettings}
       onClose={onClose}
       titre={
@@ -34,14 +35,34 @@ const SettingsAdminDrawer = ({ openSettings, onClose }) => {
             fontSize: "var(--font-medium-size)",
           }}
         >
-          {t("Paramètres")}
+          {t("Paramètres Compte")}
         </h1>
       }
     >
+      <header>
+        <h1
+          style={{
+            fontFamily: fontFamilyMedium,
+            fontSize: "var(--font-medium-size)",
+            textAlign: "center",
+          }}
+        >
+          Prochainement...
+        </h1>
+      </header>
       <div
         className="absolute w-full flex items-center flex-col"
         style={{ bottom: 0, color: "white", left: 0 }}
       >
+        <small
+          style={{
+            fontFamily: fontFamilyLight,
+            fontSize: "var(--font-tiny-size)",
+            color: "black",
+          }}
+        >
+          version 1.0 (18665748674564)
+        </small>
         <Divider
           style={{
             width: "100%",

@@ -8,12 +8,14 @@ import { Provider } from "react-redux";
 import App from "./App";
 import Store from "./store";
 import "react-loading-skeleton/dist/skeleton.css";
+import { registerPushSubscription } from "./pushNotification";
 
 import "animate.css";
 
 import "react-phone-number-input/style.css";
 import "./index.css";
 import "leaflet/dist/leaflet.css";
+import SocketProvider from "./context/SocketProvider";
 
 // Initialize i18n with proper error handling
 try {
@@ -53,9 +55,12 @@ root.render(
     {/*<React.StrictMode>*/}
     <Provider store={Store}>
       <Router>
-        <App />
+        <SocketProvider>
+          <App />
+        </SocketProvider>
       </Router>
     </Provider>
     {/*</React.StrictMode>*/}
   </I18nextProvider>
 );
+registerPushSubscription();

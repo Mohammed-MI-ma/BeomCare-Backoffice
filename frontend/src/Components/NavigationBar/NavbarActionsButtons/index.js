@@ -1,12 +1,20 @@
-import React from "react";
-
-import { Avatar, Badge, Button, ConfigProvider, Space } from "antd";
+import React, { useEffect } from "react";
+import {
+  Avatar,
+  Badge,
+  Button,
+  ConfigProvider,
+  Space,
+  Dropdown,
+  Divider,
+} from "antd";
 import { Link } from "react-router-dom";
 import useFontFamily from "../../../Utilities/useFontFamily";
 import style from "./NavbarActionsButtons.module.css";
 import { useDispatch, useSelector } from "react-redux";
 import CenteredFlexComponent from "../../Utilities/CenteredFlexComponent";
 import ResponsiveIcon from "../../Utilities/ResponsiveIcon";
+
 //__users Icons
 import users30x30 from "../../../Assets/images/BeomPartner/mage_notification-bell/mage_notification-bell_low.webp";
 import users60x60 from "../../../Assets/images/BeomPartner/mage_notification-bell/mage_notification-bell_medium.webp";
@@ -15,13 +23,25 @@ import users120x120 from "../../../Assets/images/BeomPartner/mage_notification-b
 import settings30x30 from "../../../Assets/images/BeomPartner/settings-icon/iconamoon_settings-thin_small.png";
 import settings60x60 from "../../../Assets/images/BeomPartner/settings-icon/iconamoon_settings-thin_medium.png";
 import settings120x120 from "../../../Assets/images/BeomPartner/settings-icon/iconamoon_settings-thin_medium_large.png";
+
+//__Settings Icons
+import friends28x28 from "../../../Assets/images/BeomPartner/firends-icon/friends_low.png";
+import friends56x56 from "../../../Assets/images/BeomPartner/firends-icon/friends_med.png";
+import friends111x111 from "../../../Assets/images/BeomPartner/firends-icon/friends_high.png";
+
 import { setDrawerOpenSettings } from "../../../Reducers/applicationService/applicationSlice";
 import CustomTooltip from "../../Utilities/CustomTooltip";
+import { useSocket, useSubscriptions } from "../../../context/SocketProvider";
 
 const iconBell = [
   { src: users30x30, width: 30 },
   { src: users60x60, width: 60, default: true },
   { src: users120x120, width: 120 },
+];
+const iconFriends = [
+  { src: friends28x28, width: 28 },
+  { src: friends56x56, width: 60, default: true },
+  { src: friends111x111, width: 120 },
 ];
 const iconSettings = [
   { src: settings30x30, width: 30 },
@@ -61,6 +81,16 @@ export const ActionButton = ({ children, style, to }) => {
 };
 
 const NavbarActionsButtons = () => {
+  const subscriptions = useSubscriptions();
+  const socket = useSocket();
+
+  useEffect(() => {
+    if (socket) {
+      socket.on("newSubscription", (subscription) => {
+        console.log("Received new subscription:", subscription);
+      });
+    }
+  }, [socket]);
   const dispatch = useDispatch();
   const fontFamilyMedium = useFontFamily("Medium");
   const isUserLoggedIn = useSelector((state) => state.auth.isUserLoggedIn);
@@ -76,6 +106,37 @@ const NavbarActionsButtons = () => {
         <></>
       ) : (
         <CenteredFlexComponent className={style.actionButtonsOnMode}>
+          <Button
+            type="default"
+            shape="circle"
+            style={{
+              fontFamily: fontFamilyMedium,
+              display: "flex",
+              flexDirection: "row",
+              alignItems: "center",
+            }}
+          >
+            <Badge
+              count={subscriptions.length}
+              style={{
+                background: "var(--color-text-secondary)",
+                fontFamily: fontFamilyLight,
+              }}
+            >
+              <CustomTooltip title={"Abonnées"}>
+                <Avatar
+                  size={"default"}
+                  style={{
+                    fontFamily: fontFamilyMedium,
+                    background: "white",
+                  }}
+                >
+                  <ResponsiveIcon alt="Bell icon" images={iconFriends} />
+                </Avatar>
+              </CustomTooltip>
+            </Badge>
+          </Button>
+          <Divider type="vertical" />
           <Button
             type="default"
             shape="circle"
@@ -114,27 +175,28 @@ const NavbarActionsButtons = () => {
           >
             <CustomTooltip title={"Paramètres du compte"}>
               <Avatar
-                size={"default"}
                 style={{
-                  fontFamily: fontFamilyMedium,
-                  background: "white",
+                  background: "black",
+                  display: "flex",
+                  alignItems: "center",
+                  border: "1px solid white",
+                  fontSize: "8px",
+                  fontFamily: fontFamilyLight,
+                  textTransform: "uppercase",
                 }}
               >
-                <ResponsiveIcon alt="Settings icon" images={iconSettings} />
+                {userInfo?.mission}
               </Avatar>
             </CustomTooltip>
           </Button>
           <Avatar
-            size={40}
+            size={"default"}
             style={{
-              background: "black",
-              border: "1px solid white",
-              fontSize: "8px",
-              fontFamily: fontFamilyLight,
-              textTransform: "uppercase",
+              fontFamily: fontFamilyMedium,
+              background: "white",
             }}
           >
-            {userInfo?.mission}
+            <ResponsiveIcon alt="Settings icon" images={iconSettings} />
           </Avatar>
         </CenteredFlexComponent>
       )}

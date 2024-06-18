@@ -30,7 +30,7 @@ const authSlice = createSlice({
       state.error = initialState.error;
       state.success = initialState.success;
       state.forgotPasswordData = initialState.forgotPasswordData;
-      state.isUserLoggedIn = initialState.isUserLoggedIn;
+      state.isUserLoggedIn = false;
       state.loading = initialState.loading;
     },
     setForgotPasswordData: (state, { payload }) => {

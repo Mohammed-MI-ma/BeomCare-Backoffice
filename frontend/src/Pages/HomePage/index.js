@@ -14,6 +14,7 @@ import {
   RightOutlined,
   AntDesignOutlined,
 } from "@ant-design/icons";
+import { maskEmail } from "../../Utilities/emailMask";
 
 const { Content, Sider } = Layout;
 
@@ -76,7 +77,7 @@ const HomePage = ({ mainContent }) => {
           }}
         >
           <h1 className="p-4" style={{ color: "var(--color-text-secondary)" }}>
-            {t("Abonnés sur BeomCare")}
+            {t("Abonnés BeomCare")}
           </h1>
           <Link className="p-4 flex " style={{ color: "var(--color-blue)" }}>
             <p>{t("Voir Plus")}</p>
@@ -105,121 +106,100 @@ const HomePage = ({ mainContent }) => {
             </div>
           </div>
           <div
-            className="w-screen min-h-[100px]  overflow-x-auto whitespace-nowrap"
+            className="w-screen min-h-[100px] overflow-x-auto whitespace-nowrap "
             style={{ scrollbarWidth: "none", msOverflowStyle: "none" }}
           >
-            <div className="inline-flex  flex-col items-center">
-              <Avatar
-                size={{
-                  xs: 60,
-                  sm: 60,
-                  md: 60,
-                  lg: 64,
-                  xl: 80,
-                  xxl: 100,
+            <div
+              className="shadow-lg inline-flex justify-center items-center"
+              style={{
+                borderRadius: "50%",
+                width: "60px",
+                height: "60px",
+                background: "var(--color-text-secondary)",
+                color: "white",
+              }}
+            >
+              <LuPlus />
+            </div>
+            <div
+              className="shadow-lg inline-flex justify-center items-center"
+              style={{
+                borderRadius: "50%",
+                width: "60px",
+                height: "60px",
+                background: "var(--color-text-secondary)",
+                color: "white",
+              }}
+            >
+              <LuPlus />
+            </div>
+            <div
+              className="shadow-lg inline-flex justify-center items-center"
+              style={{
+                borderRadius: "50%",
+                width: "60px",
+                height: "60px",
+                background: "var(--color-text-secondary)",
+                color: "white",
+              }}
+            >
+              <LuPlus />
+            </div>
+            <div
+              className="shadow-lg inline-flex justify-center items-center"
+              style={{
+                borderRadius: "50%",
+                width: "60px",
+                height: "60px",
+                background: "var(--color-text-secondary)",
+                color: "white",
+              }}
+            >
+              <LuPlus />
+            </div>
+            <div
+              className="shadow-lg inline-flex justify-center items-center"
+              style={{
+                borderRadius: "50%",
+                width: "60px",
+                height: "60px",
+                background: "var(--color-text-secondary)",
+                color: "white",
+              }}
+            >
+              <LuPlus />
+            </div>
+            <div
+              className="shadow-lg inline-flex justify-center items-center"
+              style={{
+                borderRadius: "50%",
+                width: "60px",
+                height: "60px",
+                background: "var(--color-text-secondary)",
+                color: "white",
+              }}
+            >
+              <LuPlus />
+            </div>
+            <div
+              className="shadow-lg inline-flex justify-center items-center border"
+              style={{
+                borderRadius: "50%",
+                width: "60px",
+                height: "60px",
+              }}
+            >
+              <p
+                style={{
+                  height: "1em",
+                  color: "var(--color-text-secondary)",
+                  fontSize: "var(--font-small-size)",
+                  fontFamily: fontFamilyMedium,
                 }}
-                icon={<AntDesignOutlined />}
-              />
-              <p style={{ fontSize: "var(--font-tiny-size)" }}>qsdqsd</p>
-            </div>{" "}
-            <div className="inline-flex  flex-col items-center">
-              <Avatar
-                size={{
-                  xs: 60,
-                  sm: 60,
-                  md: 60,
-                  lg: 64,
-                  xl: 80,
-                  xxl: 100,
-                }}
-                icon={<AntDesignOutlined />}
-              />
-              <p style={{ fontSize: "var(--font-tiny-size)" }}>qsdqsd</p>
-            </div>{" "}
-            <div className="inline-flex  flex-col items-center">
-              <Avatar
-                size={{
-                  xs: 60,
-                  sm: 60,
-                  md: 60,
-                  lg: 64,
-                  xl: 80,
-                  xxl: 100,
-                }}
-                icon={<AntDesignOutlined />}
-              />
-              <p style={{ fontSize: "var(--font-tiny-size)" }}>qsdqsd</p>
-            </div>{" "}
-            <div className="inline-flex  flex-col items-center">
-              <Avatar
-                size={{
-                  xs: 60,
-                  sm: 60,
-                  md: 60,
-                  lg: 64,
-                  xl: 80,
-                  xxl: 100,
-                }}
-                icon={<AntDesignOutlined />}
-              />
-              <p style={{ fontSize: "var(--font-tiny-size)" }}>qsdqsd</p>
-            </div>{" "}
-            <div className="inline-flex  flex-col items-center">
-              <Avatar
-                size={{
-                  xs: 60,
-                  sm: 60,
-                  md: 60,
-                  lg: 64,
-                  xl: 80,
-                  xxl: 100,
-                }}
-                icon={<AntDesignOutlined />}
-              />
-              <p style={{ fontSize: "var(--font-tiny-size)" }}>qsdqsd</p>
-            </div>{" "}
-            <div className="inline-flex  flex-col items-center">
-              <Avatar
-                size={{
-                  xs: 60,
-                  sm: 60,
-                  md: 60,
-                  lg: 64,
-                  xl: 80,
-                  xxl: 100,
-                }}
-                icon={<AntDesignOutlined />}
-              />
-              <p style={{ fontSize: "var(--font-tiny-size)" }}>qsdqsd</p>
-            </div>{" "}
-            <div className="inline-flex  flex-col items-center">
-              <Avatar
-                size={{
-                  xs: 60,
-                  sm: 60,
-                  md: 60,
-                  lg: 64,
-                  xl: 80,
-                  xxl: 100,
-                }}
-                icon={<AntDesignOutlined />}
-              />
-              <p style={{ fontSize: "var(--font-tiny-size)" }}>qsdqsd</p>
-            </div>{" "}
-            <div className="inline-flex  flex-col items-center">
-              <Avatar
-                size={{
-                  xs: 60,
-                  sm: 60,
-                  md: 60,
-                  lg: 64,
-                  xl: 80,
-                  xxl: 100,
-                }}
-                icon={<AntDesignOutlined />}
-              />
-              <p style={{ fontSize: "var(--font-tiny-size)" }}>qsdqsd</p>
-            </div>{" "}
+              >
+                +40
+              </p>
+            </div>
           </div>
         </div>
       </section>
@@ -287,48 +267,26 @@ const CustomSider = ({ userInfo, fontFamilyLight }) => {
   return (
     <>
       <Sider
-        className={`${style.sider} shadow-lg`}
+        className={`${style.sider}`}
         style={{
           color: "white",
           fontFamily: fontFamilyLight,
-          borderRight: "1px solid rgba(4, 30, 73, 0.3)",
         }}
       >
         <p style={{ textTransform: "capitalize" }}>{userInfo?.role}</p>
-        <div>
-          <p style={{ fontFamily: fontFamilyBold, fontSize: "12px" }}>
-            <div
-              style={{
-                display: "flex",
-                justifyContent: "center",
-                alignItems: "center",
-                gap: "5px",
-              }}
-            >
-              <MailOutlined />
-              <p>{userInfo?.email}</p>
-            </div>
-          </p>
-        </div>
-        <div className="absolute" style={{ bottom: 0, color: "white" }}>
-          <Divider
+
+        <div style={{ fontFamily: fontFamilyBold, fontSize: "12px" }}>
+          <div
             style={{
-              width: "100%",
-              backgroundColor: "white",
-              height: "2px",
+              display: "flex",
+              justifyContent: "center",
+              alignItems: "center",
+              gap: "5px",
             }}
-          />
-          <Button
-            onClick={logoutAction}
-            type="link"
-            style={{
-              fontFamily: fontFamilyMedium,
-              color: "rgba(4, 30, 73, 1)",
-            }}
-            icon={<LogoutOutlined />}
           >
-            {t("se déconnecter")}
-          </Button>
+            <MailOutlined />
+            <p>{maskEmail(userInfo?.email)}</p>
+          </div>
         </div>
       </Sider>
     </>

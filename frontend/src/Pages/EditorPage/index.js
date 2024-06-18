@@ -1,31 +1,20 @@
-import React, {
-  Suspense,
-  lazy,
-  useEffect,
-  useState,
-  useTransition,
-} from "react";
+import React, { useEffect, useState } from "react";
 import HomePage from "../HomePage";
-import { Alert, Button, Checkbox, ConfigProvider } from "antd";
-import Skeleton from "react-loading-skeleton";
+import { Button, Divider, Avatar } from "antd";
+import { useSubscriptions } from "../../context/SocketProvider";
+import { MdQueryStats } from "react-icons/md";
+import { BsInfoCircle } from "react-icons/bs";
+import { FaMapMarked } from "react-icons/fa";
 
 import useFontFamily from "../../Utilities/useFontFamily";
-import CenteredFlexComponent from "../../Components/Utilities/CenteredFlexComponent";
-import { AppstoreAddOutlined, FileAddOutlined } from "@ant-design/icons";
-import { CiMenuKebab } from "react-icons/ci";
-import Marquee from "react-fast-marquee";
 import style from "./editorPage.module.css";
-//__users Icons
-//__Settings Icons
+
 import { useTranslation } from "react-i18next";
-import CategoryManager from "../../Components/CategoryManager";
+import RealTimeGraph from "../../Components/RealTimeGraph";
+
 import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import AnimatesIcon from "../../Components/Utilities/AnimatedIcon";
-import CategoriesList from "./CategoriesList";
-const AddCategoryComponent = lazy(() =>
-  import("../../Components/AddCategoryComponent")
-);
+import CategoriesBeomSection from "./CategoriesBeomSection";
 
 const EditorPage = () => {
   return <HomePage mainContent={<EditorContent />} />;
@@ -34,137 +23,172 @@ const EditorPage = () => {
 export default EditorPage;
 const EditorContent = () => {
   const { t } = useTranslation();
+  const subscriptions = useSubscriptions();
   const isUserLoggedIn = useSelector((state) => state.auth.isUserLoggedIn);
   const navigate = useNavigate();
+  const [aggregatedData, setAggregatedData] = useState([]);
 
   const fontFamilyLight = useFontFamily("Light");
   const fontFamilyMedium = useFontFamily("Medium");
+  const fontFamilyBold = useFontFamily("SemiBold");
 
-  const [isOpenDrawer, setIsOpenDrawer] = useState(false);
-  const [isPending, startTransition] = useTransition();
+  const userInfo = useSelector((state) => state.auth.userInfo);
 
-  const toggleDrawer = (state) => {
-    startTransition(() => {
-      setIsOpenDrawer(state);
-    });
-  };
   useEffect(() => {
     if (!isUserLoggedIn) {
       navigate("/");
     }
   }, [isUserLoggedIn, navigate]);
+  useEffect(() => {
+    if (subscriptions.length > 0) {
+      const aggregated = subscriptions.reduce((acc, { timestamp }) => {
+        const date = new Date(timestamp);
+        const dateString = date.toISOString().split("T")[0];
 
-  const pagination = useSelector((state) => state.application.pagination);
-  const isGettingCategories = useSelector(
-    (state) => state.application.isGettingCategories
-  );
+        const existing = acc.find((d) => d.timestamp === dateString);
+        if (existing) {
+          existing.count += 1;
+        } else {
+          acc.push({ timestamp: timestamp, count: 1 });
+        }
+
+        return acc;
+      }, []);
+
+      console.log("Aggregated Data:", aggregated); // Log aggregated data
+      setAggregatedData(aggregated);
+    }
+  }, [subscriptions]);
+  // Add some mock data to test rendering
+
   return (
-    <ConfigProvider
-      theme={{
-        token: {
-          colorPrimary: "#0b57d0",
-        },
-        components: {
-          List: {
-            itemPadding: 20,
-          },
-        },
-      }}
-    >
-      <div
-        className={`flex gap-10 flex-col w-full `}
-        style={{ overflow: "hidden" }}
-      >
-        <div
-          className={`w-full flex justify-between align-center gap-10  ${style.topMenuBar}`}
-        >
-          <section>
+    <div>
+      <div>
+        <section className="mb-9">
+          <u>
             <h1
               style={{
-                fontFamily: fontFamilyMedium,
-                fontSize: "var(--font-small-size)",
                 display: "flex",
+                fontFamily: fontFamilyBold,
+                fontSize: "var(--font-small-size)",
                 gap: "var(--gap-small)",
-                color: "var(--color-text-secondary)",
+                color: "var(--color-primary)",
               }}
             >
-              {t("Catégories BeomCare")}
+              <FaMapMarked />
+              {t("Les 5 endroits les plus visités en ce moment")}
             </h1>
-            <Alert
-              banner
-              type="info"
-              message={
-                <Marquee pauseOnHover gradient={false}>
-                  <p
-                    style={{
-                      fontFamily: fontFamilyLight,
-                      fontSize: "var(--font-tiny-size)",
-                    }}
-                  >
-                    {t(
-                      "Rappel : Le compte suivant a uniquement accès à la création de nouvelles catégories sous l'autorisation de l'administrateur. Aucune catégorie nouvellement créée ne sera partagée avec le public sans la confirmation de l'administrateur."
-                    )}
-                  </p>
-                </Marquee>
-              }
-            />
-          </section>
-          <div style={{ display: "flex", alignItems: "center" }}>
-            <Button
-              loading={isPending}
-              type="primary"
-              onClick={() => toggleDrawer(true)}
-              className="w-full  flex bg-white flex-row items-center justify-center shadow-lg border-black border rounded-lg h-12"
+          </u>
+          <h2
+            style={{
+              fontFamily: fontFamilyLight,
+              fontSize: "var(--font-tiny-size)",
+              display: "flex",
+              gap: "var(--gap-small)",
+              color: "var(--color-text-secondary)",
+            }}
+          >
+            {t(
+              "Graphique montrant l'evolution des abonnés BeomCare au fil du temps"
+            )}
+          </h2>
+        </section>
+      </div>
+      <Divider />
+      <div
+        className={`${style.statisticsContainer} flex items-center`}
+        style={{ backgound: "aliceblue" }}
+      >
+        <section className="mb-9">
+          <u>
+            <h1
               style={{
-                fontFamily: fontFamilyMedium,
-                color: "var(--color-text-secondary)",
+                display: "flex",
+                fontFamily: fontFamilyBold,
+                fontSize: "var(--font-small-size)",
+                gap: "var(--gap-small)",
+                color: "var(--color-primary)",
               }}
             >
-              {t("Ajouter nouvelle catégorie")}
-            </Button>
-          </div>
-        </div>
-        <div className="w-full gap-5 flex flex-col">
-          <div>
-            <CenteredFlexComponent
-              className="gap-1 "
-              style={{ justifyContent: "flex-start" }}
-            >
-              {isGettingCategories ? (
-                <Skeleton
-                  height={15}
-                  width={10}
-                  borderRadius={50}
-                  className="shadow-lg"
-                />
-              ) : (
-                pagination?.totalItems
-              )}
-
-              <p
-                style={{
-                  fontFamily: fontFamilyLight,
-                  fontSize: "var(--font-tiny-size)",
-                }}
-              >
-                {t("Catégorie(s)")}
-              </p>
-            </CenteredFlexComponent>
-            <CategoriesList />
-          </div>
-        </div>
-      </div>
-
-      <Suspense fallback={<div>Loading...</div>}>
-        {isOpenDrawer && (
-          <AddCategoryComponent
-            isOpenDrawer={isOpenDrawer}
-            onCloseHandler={() => toggleDrawer(false)}
+              <MdQueryStats />
+              {t("Statistiques Globales")}
+            </h1>
+          </u>
+          <h2
+            style={{
+              fontFamily: fontFamilyLight,
+              fontSize: "var(--font-tiny-size)",
+              display: "flex",
+              gap: "var(--gap-small)",
+              color: "var(--color-text-secondary)",
+            }}
           >
-            <CategoryManager />
-          </AddCategoryComponent>
-        )}
-      </Suspense>
-    </ConfigProvider>
+            {t(
+              "Graphique montrant l'evolution des abonnés BeomCare au fil du temps"
+            )}
+          </h2>
+          <div>
+            <RealTimeGraph data={aggregatedData} />
+          </div>
+        </section>
+        <section className="flex justify-center items-center border h-[300px] rounded-lg shadow-lg flex-col p-3 ">
+          <Avatar
+            size={100}
+            style={{
+              background: "var(--color-text-secondary)",
+              border: "1px solid white",
+              fontSize: "16px",
+              fontFamily: fontFamilyLight,
+              textTransform: "uppercase",
+            }}
+            className="shadow-lg"
+          >
+            {userInfo?.mission}
+          </Avatar>
+          <div
+            style={{
+              fontFamily: fontFamilyBold,
+              textAlign: "center",
+            }}
+          >
+            {t("BeomCare rédacteur")}
+          </div>
+          <div
+            style={{
+              fontFamily: fontFamilyLight,
+              textAlign: "center",
+              fontSize: "10px",
+            }}
+          >
+            {t(
+              "une plateforme exclusive dédiée à la gestion, révision et édition de contenu Beom Care"
+            )}
+          </div>
+          <p
+            style={{
+              fontFamily: fontFamilyBold,
+              textAlign: "center",
+              fontSize: "10px",
+            }}
+          >
+            {" "}
+            {t(" y'en a d'autres plateformes?")}
+          </p>
+          <Button
+            icon={<BsInfoCircle />}
+            type="link"
+            className="w-full flex bg-white flex-row items-center justify-center "
+            style={{
+              fontFamily: fontFamilyMedium,
+              color: "var(--color-text-secondary)",
+            }}
+          >
+            <u>{t("Centre d'aide")}</u>
+          </Button>
+        </section>
+      </div>
+      <Divider />
+      <CategoriesBeomSection />
+    </div>
   );
 };
