@@ -8,12 +8,7 @@ import style from "./homepage.module.css";
 import { LuPlus } from "react-icons/lu";
 
 import { logout } from "../../Reducers/authService/authSlice";
-import {
-  MailOutlined,
-  LogoutOutlined,
-  RightOutlined,
-  AntDesignOutlined,
-} from "@ant-design/icons";
+import { MailOutlined, RightOutlined } from "@ant-design/icons";
 import { maskEmail } from "../../Utilities/emailMask";
 
 const { Content, Sider } = Layout;
@@ -247,23 +242,8 @@ const MainContent = ({ userInfo, fontFamilyLight, mainContent }) => (
 );
 
 const CustomSider = ({ userInfo, fontFamilyLight }) => {
-  const { t } = useTranslation();
-  const dispatch = useDispatch();
-  const navigate = useNavigate();
   const fontFamilyBold = useFontFamily("SemiBold");
-  const fontFamilyMedium = useFontFamily("Medium");
 
-  //__ACTIONS
-  const logoutAction = async () => {
-    try {
-      await dispatch(logout());
-      navigate("/");
-    } catch (error) {
-      // Handle any errors if necessary
-      console.log(error);
-      navigate("/");
-    }
-  };
   return (
     <>
       <Sider

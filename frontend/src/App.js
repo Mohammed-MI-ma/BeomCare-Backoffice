@@ -16,7 +16,6 @@ import { useTranslation } from "react-i18next";
 import { useDispatch, useSelector } from "react-redux";
 import SettingsAdminDrawer from "./Components/SettingsAdminDrawer";
 import { setDrawerOpenSettings } from "./Reducers/applicationService/applicationSlice";
-import * as serviceWorkerRegistration from "./serviceWorkerRegistration";
 
 function App() {
   const [appIsReady, setAppIsReady] = useState(false);

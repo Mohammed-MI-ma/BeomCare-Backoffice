@@ -1,21 +1,22 @@
 // serviceWorkerRegistration.js
 
-export function register() {
+export async function registerServiceWorker() {
   if ("serviceWorker" in navigator) {
-    window.addEventListener("load", () => {
-      const swUrl = `${process.env.REACT_APP_BASE_API_URI_DEV}/service-worker.js`;
-
-      navigator.serviceWorker
-        .register(swUrl)
-        .then((registration) => {
-          console.log("Service Worker registered:", registration);
-        })
-        .catch((error) => {
-          console.error("Error registering Service Worker:", error);
-        });
+    window.addEventListener("load", async function () {
+      navigator.serviceWorker.register("/firebase-messaging-sw.js").then(
+        function (registration) {
+          console.log(
+            "Service Worker registered with scope:",
+            registration.scope
+          );
+        },
+        function (err) {
+          console.error("Service Worker registration failed:", err);
+        }
+      );
     });
   } else {
-    console.warn("Service Worker is not supported by this browser");
+    console.warn("Service Worker is not supported in this browser.");
   }
 }
 

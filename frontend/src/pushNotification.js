@@ -4,7 +4,7 @@ export const registerPushSubscription = async () => {
   if ("serviceWorker" in navigator && "PushManager" in window) {
     try {
       const registration = await navigator.serviceWorker.register(
-        "/service-worker.js"
+        "/firebase-messaging-sw.js"
       );
       console.log("Service Worker registered:", registration);
       console.log("sqdfdsd566,", process.env.PUBLIC_VAPID_KEY);

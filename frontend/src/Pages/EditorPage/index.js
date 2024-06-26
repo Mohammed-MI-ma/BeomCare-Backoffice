@@ -5,6 +5,8 @@ import { useSubscriptions } from "../../context/SocketProvider";
 import { MdQueryStats } from "react-icons/md";
 import { BsInfoCircle } from "react-icons/bs";
 import { FaMapMarked } from "react-icons/fa";
+import { LuPlus } from "react-icons/lu";
+import { MailOutlined, RightOutlined } from "@ant-design/icons";
 
 import useFontFamily from "../../Utilities/useFontFamily";
 import style from "./editorPage.module.css";
@@ -13,7 +15,7 @@ import { useTranslation } from "react-i18next";
 import RealTimeGraph from "../../Components/RealTimeGraph";
 
 import { useSelector } from "react-redux";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import CategoriesBeomSection from "./CategoriesBeomSection";
 
 const EditorPage = () => {
