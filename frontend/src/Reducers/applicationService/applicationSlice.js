@@ -28,6 +28,10 @@ const initialState = {
 
   //DrawerSettings
   drawerOpenSettings: false,
+
+  //PartnersOnHold
+  partnersOnHold: [],
+  activePartnerOnHold: { id: 5 },
 };
 
 // Slice definition
@@ -35,6 +39,12 @@ const applicationSlice = createSlice({
   name: "application",
   initialState,
   reducers: {
+    setPartnersOnHold(state, action) {
+      state.partnersOnHold = action.payload;
+    },
+    setActivePartnerOnHold(state, action) {
+      state.activePartnerOnHold = action.payload;
+    },
     setLanguage(state, action) {
       state.language = action.payload;
     },
@@ -76,6 +86,8 @@ export const {
   setIsGettingCategories,
   setCategories,
   setDrawerOpenSettings,
+  setPartnersOnHold,
+  setActivePartnerOnHold,
 } = applicationSlice.actions;
 
 // Export reducer

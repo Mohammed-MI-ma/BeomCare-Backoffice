@@ -167,3 +167,11 @@ input,
   background-color: #000000;
   border-color: #000000;
 }
+/* Add this to your global CSS file */
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+.no-scrollbar {
+  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none; /* Firefox */
+}

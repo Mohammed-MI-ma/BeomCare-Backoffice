@@ -4,9 +4,6 @@ import { Button, Divider, Avatar } from "antd";
 import { useSubscriptions } from "../../context/SocketProvider";
 import { MdQueryStats } from "react-icons/md";
 import { BsInfoCircle } from "react-icons/bs";
-import { FaMapMarked } from "react-icons/fa";
-import { LuPlus } from "react-icons/lu";
-import { MailOutlined, RightOutlined } from "@ant-design/icons";
 
 import useFontFamily from "../../Utilities/useFontFamily";
 import style from "./editorPage.module.css";
@@ -15,8 +12,9 @@ import { useTranslation } from "react-i18next";
 import RealTimeGraph from "../../Components/RealTimeGraph";
 
 import { useSelector } from "react-redux";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import CategoriesBeomSection from "./CategoriesBeomSection";
+import WaitingPartners from "../../Components/WaitingPartners";
 
 const EditorPage = () => {
   return <HomePage mainContent={<EditorContent />} />;
@@ -64,37 +62,12 @@ const EditorContent = () => {
   // Add some mock data to test rendering
 
   return (
-    <div>
-      <div>
-        <section className="mb-9">
-          <u>
-            <h1
-              style={{
-                display: "flex",
-                fontFamily: fontFamilyBold,
-                fontSize: "var(--font-small-size)",
-                gap: "var(--gap-small)",
-                color: "var(--color-primary)",
-              }}
-            >
-              <FaMapMarked />
-              {t("Les 5 endroits les plus visités en ce moment")}
-            </h1>
-          </u>
-          <h2
-            style={{
-              fontFamily: fontFamilyLight,
-              fontSize: "var(--font-tiny-size)",
-              display: "flex",
-              gap: "var(--gap-small)",
-              color: "var(--color-text-secondary)",
-            }}
-          >
-            {t(
-              "Graphique montrant l'evolution des abonnés BeomCare au fil du temps"
-            )}
-          </h2>
-        </section>
+    <div className="w-full">
+      <div
+        className={`${style.statisticsContainer} flex items-center w-full gap-5`}
+        style={{ backgound: "aliceblue" }}
+      >
+        <WaitingPartners />
       </div>
       <Divider />
       <div

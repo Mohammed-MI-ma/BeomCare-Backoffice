@@ -1,13 +1,7 @@
 import React, { useEffect } from "react";
-import {
-  Avatar,
-  Badge,
-  Button,
-  ConfigProvider,
-  Space,
-  Dropdown,
-  Divider,
-} from "antd";
+import { Avatar, Badge, Button, ConfigProvider, Space, Divider } from "antd";
+import { RiSpam2Line } from "react-icons/ri";
+
 import { Link } from "react-router-dom";
 import useFontFamily from "../../../Utilities/useFontFamily";
 import style from "./NavbarActionsButtons.module.css";
@@ -187,6 +181,34 @@ const NavbarActionsButtons = () => {
               >
                 {userInfo?.mission}
               </Avatar>
+            </CustomTooltip>
+          </Button>
+          <Button
+            type="default"
+            shape="circle"
+            style={{
+              fontFamily: fontFamilyMedium,
+              display: "flex",
+              flexDirection: "row",
+              alignItems: "center",
+            }}
+            danger
+          >
+            <CustomTooltip title={"Spameurs"}>
+              <Badge count="10">
+                <Avatar
+                  style={{
+                    display: "flex",
+                    alignItems: "center",
+                    fontSize: "8px",
+                    fontFamily: fontFamilyLight,
+                    background: "white",
+                    textTransform: "uppercase",
+                  }}
+                >
+                  <RiSpam2Line style={{ fontSize: "20px", color: "red" }} />
+                </Avatar>
+              </Badge>
             </CustomTooltip>
           </Button>
           <Avatar
